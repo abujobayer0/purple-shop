@@ -10,7 +10,6 @@ const Tags = ({ tags, setTag, active }) => {
         onClick={() => setTag("")}
         variant={active === "" ? "contained" : "text"}
       >
-        {" "}
         All
       </Button>
       {tags?.map((tag, indx) => (

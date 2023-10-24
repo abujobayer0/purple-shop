@@ -3,5 +3,14 @@ import Tags from "./tags";
 import Collections from "./collections";
 import Categories from "./categories";
 import ProductCard from "./productCard";
-
-export { NavBar, ProductCard, Categories, Collections, Tags };
+import Products from "./products";
+import BackButton from "./backButton";
+export {
+  NavBar,
+  BackButton,
+  ProductCard,
+  Categories,
+  Products,
+  Collections,
+  Tags,
+};

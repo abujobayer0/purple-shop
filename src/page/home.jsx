@@ -3,8 +3,7 @@ import useFetchCategories from "../hooks/useFetchCategories";
 import useFetchTags from "../hooks/useFetchTags";
 import useFetchCollection from "../hooks/useFetchCollection";
 import useFetchProducts from "../hooks/useFetchProducts";
-import { Categories, Collections, NavBar, Tags } from "../components";
-import Products from "../components/products";
+import { Categories, Products, Collections, NavBar, Tags } from "../components";
 
 // function getSearchParams(category, tag, collection) {
 //   const params = {};
@@ -23,7 +22,7 @@ const Home = () => {
   const [tag, setTag] = useState("");
 
   let queryUrl;
-  if (tag) {
+  if (tag !== "") {
     queryUrl = `/items?tag=${encodeURIComponent(tag)}`;
   }
   // if (category && tag) {
@@ -48,25 +47,16 @@ const Home = () => {
   // const searchParams = getSearchParams(category, tag, collection);
   // const queryUrl = searchParams ? `/items?${searchParams}` : "/items";
 
-  // const url = queryUrl || "/items";
-  const products = useFetchProducts(queryUrl);
+  const url = queryUrl || "/items";
+  const products = useFetchProducts(url);
   const categories = useFetchCategories();
   const tags = useFetchTags();
   const collections = useFetchCollection();
 
   return (
     <>
-      <NavBar />
-      <Categories
-        active={category}
-        setCategory={setCategory}
-        categories={categories}
-      />
-      <Collections
-        active={collection}
-        setCollection={setCollection}
-        collections={collections}
-      />
+      <Categories categories={categories} />
+      <Collections collections={collections} />
       <Tags active={tag} setTag={setTag} tags={tags} />
       <Products Products={products} />
     </>
