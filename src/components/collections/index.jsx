@@ -1,10 +1,28 @@
 import React from "react";
+import { Container, Button, Typography } from "@mui/material";
 
-const Collections = ({ collection }) => {
+const Collections = ({ collections, setCollection, active }) => {
   return (
-    <div>
-      <h1>{collection}</h1>
-    </div>
+    <Container>
+      <Typography variant="h4">Collections</Typography>{" "}
+      <Button
+        color="secondary"
+        onClick={() => setCollection("")}
+        variant={active === "" ? "contained" : "text"}
+      >
+        All
+      </Button>
+      {collections?.map((collection, indx) => (
+        <Button
+          key={indx}
+          color="secondary"
+          onClick={() => setCollection(collection)}
+          variant={active === collection ? "contained" : "text"}
+        >
+          {collection}
+        </Button>
+      ))}
+    </Container>
   );
 };
 

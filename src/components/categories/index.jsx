@@ -1,10 +1,28 @@
 import React from "react";
+import { Container, Typography, Button } from "@mui/material";
 
-const Categories = ({ category }) => {
+const Categories = ({ categories, setCategory, active }) => {
   return (
-    <div>
-      <h1>{category}</h1>
-    </div>
+    <Container>
+      <Typography variant="h4">Categories</Typography>
+      <Button
+        color="secondary"
+        onClick={() => setCategory("")}
+        variant={active === "" ? "contained" : "text"}
+      >
+        All
+      </Button>
+      {categories?.map((category, indx) => (
+        <Button
+          key={indx}
+          color="secondary"
+          onClick={() => setCategory(category)}
+          variant={active === category ? "contained" : "text"}
+        >
+          {category}
+        </Button>
+      ))}
+    </Container>
   );
 };
 

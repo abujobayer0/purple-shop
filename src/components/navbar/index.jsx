@@ -1,21 +1,50 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import { Container } from "@mui/material";
+import { Container, styled } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
+const Wrapper = styled(Box)({
+  flexGrow: 1,
+});
+
+const Nav = styled(AppBar)({
+  background: "white",
+  boxShadow: "none",
+  borderBottom: "1px solid lightgray",
+});
+
+const StyledTypography = styled(Typography)({
+  flexGrow: 1,
+  fontWeight: 600,
+  display: "flex",
+  alignItems: "center",
+  fontSize: { xs: 15, md: 20 },
+});
+
+const StyledShoppingCart = styled(ShoppingCartIcon)({
+  color: "rgb(248, 139, 286)",
+});
+
+const StyledContainer = styled(Container)({ padding: 10 });
+
 export default function NavBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Container>
+    <Wrapper>
+      <Nav position="static">
+        <StyledContainer>
           <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Purple Shop
-            </Typography>
+            <StyledTypography variant="h6" color={"black"} component="div">
+              <img
+                src="https://i.ibb.co/K0DT2fS/pp.jpg"
+                style={{ width: 50 }}
+                alt="logo"
+              />
+              PURPLE SHOP
+            </StyledTypography>
 
             <div>
               <IconButton
@@ -25,12 +54,12 @@ export default function NavBar() {
                 aria-haspopup="true"
                 color="inherit"
               >
-                <ShoppingCartIcon />
+                <StyledShoppingCart />
               </IconButton>
             </div>
           </Toolbar>
-        </Container>
-      </AppBar>
-    </Box>
+        </StyledContainer>
+      </Nav>
+    </Wrapper>
   );
 }
