@@ -1,9 +1,24 @@
 import React from "react";
-import useFetchProductsByCategory from "../hooks/useFetchProductsByCategory";
+import useFetchCategories from "../hooks/useFetchCategories";
+import useFetchTags from "../hooks/useFetchTags";
+import useFetchCollection from "../hooks/useFetchCollection";
+import useFetchProducts from "../hooks/useFetchProducts";
+import { Categories, Collections, NavBar, Tags } from "../components";
 
 const Home = () => {
-  const productsByCategory = useFetchProductsByCategory("jackets");
-  return <div></div>;
+  const products = useFetchProducts("/items");
+  const categories = useFetchCategories();
+  const tags = useFetchTags();
+  const collection = useFetchCollection();
+
+  return (
+    <>
+      <NavBar />
+      <Categories />
+      <Collections />
+      <Tags />
+    </>
+  );
 };
 
 export default Home;
