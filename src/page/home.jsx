@@ -3,50 +3,15 @@ import useFetchCategories from "../hooks/useFetchCategories";
 import useFetchTags from "../hooks/useFetchTags";
 import useFetchCollection from "../hooks/useFetchCollection";
 import useFetchProducts from "../hooks/useFetchProducts";
-import { Categories, Products, Collections, NavBar, Tags } from "../components";
-
-// function getSearchParams(category, tag, collection) {
-//   const params = {};
-
-//   if (category) params.category = category;
-//   if (tag) params.tag = tag;
-//   if (collection) params.collection = collection;
-
-//   const searchParams = new URLSearchParams(params);
-//   return searchParams.toString();
-// }
+import { Categories, Products, Collections, Tags } from "../components";
 
 const Home = () => {
-  const [collection, setCollection] = useState("");
-  const [category, setCategory] = useState("");
   const [tag, setTag] = useState("");
 
   let queryUrl;
   if (tag !== "") {
     queryUrl = `/items?tag=${encodeURIComponent(tag)}`;
   }
-  // if (category && tag) {
-  //   queryUrl = `/items?category=${encodeURIComponent(
-  //     category
-  //   )}&tag=${encodeURIComponent(tag)}`;
-  // } else if (category && collection) {
-  //   queryUrl = `/items?category=${encodeURIComponent(
-  //     category
-  //   )}&collection=${encodeURIComponent(collection)}`;
-  // } else if (tag && collection) {
-  //   queryUrl = `/items?tag=${encodeURIComponent(
-  //     tag
-  //   )}&collection=${encodeURIComponent(collection)}`;
-  // } else if (category) {
-  //   queryUrl = `/items?category=${encodeURIComponent(category)}`;
-  // } else if (tag) {
-  //   queryUrl = `/items?tag=${encodeURIComponent(tag)}`;
-  // } else if (collection) {
-  //   queryUrl = `/items?collection=${encodeURIComponent(collection)}`;
-  // }
-  // const searchParams = getSearchParams(category, tag, collection);
-  // const queryUrl = searchParams ? `/items?${searchParams}` : "/items";
-
   const url = queryUrl || "/items";
   const products = useFetchProducts(url);
   const categories = useFetchCategories();
@@ -54,12 +19,12 @@ const Home = () => {
   const collections = useFetchCollection();
 
   return (
-    <>
+    <React.Fragment>
       <Categories categories={categories} />
       <Collections collections={collections} />
       <Tags active={tag} setTag={setTag} tags={tags} />
       <Products Products={products} />
-    </>
+    </React.Fragment>
   );
 };
 

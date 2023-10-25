@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, styled, Typography, Box } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const StyledCard = styled(Card)(() => ({
   position: "relative",
@@ -58,7 +59,7 @@ const Title = styled(Typography)(() => ({
   textAlign: "start",
 }));
 
-const Price = styled(Typography)(() => ({
+const PriceLabel = styled(Typography)(() => ({
   fontFamily: `Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif`,
   fontSize: "0.9em",
   position: "absolute",
@@ -67,7 +68,7 @@ const Price = styled(Typography)(() => ({
   color: "#000",
 }));
 
-const Image = styled(Box)(() => ({
+const ImageContainer = styled(Box)(() => ({
   background: "rgb(248, 139, 286)",
   display: "grid",
   placeItems: "center",
@@ -76,15 +77,17 @@ const Image = styled(Box)(() => ({
 const ProductCard = ({ Product }) => {
   return (
     <StyledCard>
-      <Image>
-        <img
-          src={Product?.pictures[0]}
-          alt={Product?.title}
-          style={{ width: "100%", height: "auto" }}
-        />
-      </Image>
-      <Title variant="h6">{Product?.title}</Title>
-      <Price variant="h6"> £{Product?.price}</Price>
+      <Link to={`/item/${Product.id}`}>
+        <ImageContainer>
+          <img
+            src={Product?.pictures[0]}
+            alt={Product?.title}
+            style={{ width: "100%", height: "auto" }}
+          />
+        </ImageContainer>
+        <Title variant="h6">{Product?.title}</Title>
+        <PriceLabel variant="h6"> £{Product?.price}</PriceLabel>
+      </Link>
     </StyledCard>
   );
 };

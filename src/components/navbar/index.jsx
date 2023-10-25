@@ -7,46 +7,64 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-const Wrapper = styled(Box)({
+const Wrapper = styled(Box)(() => ({
   flexGrow: 1,
-});
+}));
 
-const Nav = styled(AppBar)({
+const Nav = styled(AppBar)(() => ({
   background: "white",
   boxShadow: "none",
   borderBottom: "1px solid lightgray",
-});
+}));
 
-const StyledTypography = styled(Typography)({
+const StyledTypography = styled(Typography)(() => ({
   flexGrow: 1,
   fontWeight: 600,
   display: "flex",
   alignItems: "center",
   fontSize: { xs: 15, md: 20 },
-});
+}));
 
-const StyledShoppingCart = styled(ShoppingCartIcon)({
-  color: "rgb(248, 139, 286)",
-});
+const StyledShoppingCart = styled(ShoppingCartIcon)(() => ({
+  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  color: "white",
+  padding: 10,
+  borderRadius: 5,
+}));
 
-const StyledContainer = styled(Container)({ padding: 10 });
+const StyledContainer = styled(Container)(() => ({ padding: 10 }));
 
-export default function NavBar() {
+const StyledToolbar = styled(Toolbar)(() => ({
+  width: "100%",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+}));
+
+const LogoWrapper = styled(Box)(() => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const NavBar = () => {
   return (
     <Wrapper>
       <Nav position="static">
         <StyledContainer>
-          <Toolbar>
-            <StyledTypography variant="h6" color={"black"} component="div">
+          <StyledToolbar>
+            <LogoWrapper>
               <img
                 src="https://i.ibb.co/K0DT2fS/pp.jpg"
                 style={{ width: 50 }}
                 alt="logo"
               />
-              PURPLE SHOP
-            </StyledTypography>
+              <StyledTypography variant="h6" color={"black"} component="div">
+                PURPLE SHOP
+              </StyledTypography>
+            </LogoWrapper>
 
-            <div>
+            <Box>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -56,10 +74,11 @@ export default function NavBar() {
               >
                 <StyledShoppingCart />
               </IconButton>
-            </div>
-          </Toolbar>
+            </Box>
+          </StyledToolbar>
         </StyledContainer>
       </Nav>
     </Wrapper>
   );
-}
+};
+export default NavBar;

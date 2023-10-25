@@ -1,24 +1,33 @@
 import React from "react";
-import { Button, Box } from "@mui/material";
+import { Button, Box, styled } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
+const Wrapper = styled(Box)(() => ({
+  margin: "25px 0",
+  display: "flex",
+  alignItems: "center",
+}));
+
+const BackBtn = styled(Button)(() => ({
+  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  color: "white",
+}));
 
 const BackButton = () => {
   const goBack = () => {
-    window.history.back(); // This function will take you back to the previous page
+    window.history.back();
   };
 
   return (
-    <Box
-      sx={{
-        margin: { xs: "50px 25px", md: "25px 0" },
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
-      <Button variant="outlined" startIcon={<ArrowBackIcon />} onClick={goBack}>
+    <Wrapper>
+      <BackBtn
+        variant="outlined"
+        startIcon={<ArrowBackIcon />}
+        onClick={goBack}
+      >
         Back
-      </Button>
-    </Box>
+      </BackBtn>
+    </Wrapper>
   );
 };
 

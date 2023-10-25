@@ -8,6 +8,7 @@ const CollectionProducts = () => {
   const { collectionId } = useParams();
   const collectionParam = encodeURIComponent(collectionId);
   const products = useFetchProducts(`/items?collection=${collectionParam}`);
+
   return (
     <Container>
       <BackButton />

@@ -8,6 +8,7 @@ const CategoryProducts = () => {
   const { categoryId } = useParams();
   const categoryParam = encodeURIComponent(categoryId);
   const products = useFetchProducts(`/items?category=${categoryParam}`);
+
   return (
     <Container>
       <BackButton />

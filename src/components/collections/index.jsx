@@ -9,8 +9,8 @@ const Title = styled(Typography)(() => ({
 }));
 
 const CollectionButton = styled(Button)(({ theme }) => ({
-  backgroundColor: theme.palette.secondary.main,
-  color: "#fff",
+  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  color: "white",
   width: 300,
   margin: "10px",
   borderRadius: "40px",
