@@ -1,11 +1,13 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import { Container, styled } from "@mui/material";
+import { Badge, Container, styled } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 const Wrapper = styled(Box)(() => ({
   flexGrow: 1,
@@ -32,7 +34,7 @@ const StyledShoppingCart = styled(ShoppingCartIcon)(() => ({
   borderRadius: 5,
 }));
 
-const StyledContainer = styled(Container)(() => ({ padding: 10 }));
+const StyledContainer = styled(Container)(() => ({ padding: 0 }));
 
 const StyledToolbar = styled(Toolbar)(() => ({
   width: "100%",
@@ -47,33 +49,56 @@ const LogoWrapper = styled(Box)(() => ({
   justifyContent: "center",
 }));
 
-const NavBar = () => {
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: "0 4px",
+  },
+}));
+
+const NavBar = ({ cartItems }) => {
+  const totalCartQuantity = cartItems.reduce(
+    (total, cartItem) => total + cartItem.quantity,
+    0
+  );
+
   return (
     <Wrapper>
       <Nav position="static">
         <StyledContainer>
           <StyledToolbar>
-            <LogoWrapper>
-              <img
-                src="https://i.ibb.co/K0DT2fS/pp.jpg"
-                style={{ width: 50 }}
-                alt="logo"
-              />
-              <StyledTypography variant="h6" color={"black"} component="div">
-                PURPLE SHOP
-              </StyledTypography>
-            </LogoWrapper>
+            <Link to={"/"}>
+              <LogoWrapper>
+                <img
+                  src="https://i.ibb.co/K0DT2fS/pp.jpg"
+                  style={{ width: 50 }}
+                  alt="logo"
+                />
+                <StyledTypography variant="h6" color={"black"} component="div">
+                  PURPLE SHOP
+                </StyledTypography>
+              </LogoWrapper>
+            </Link>
 
             <Box>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                color="inherit"
-              >
-                <StyledShoppingCart />
-              </IconButton>
+              <Link to={"/cart"}>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  color="inherit"
+                >
+                  <StyledBadge
+                    badgeContent={totalCartQuantity}
+                    color="secondary"
+                  >
+                    <StyledShoppingCart />
+                  </StyledBadge>
+                </IconButton>
+              </Link>
             </Box>
           </StyledToolbar>
         </StyledContainer>
@@ -81,4 +106,11 @@ const NavBar = () => {
     </Wrapper>
   );
 };
-export default NavBar;
+
+const mapStateToProps = (state) => {
+  return {
+    cartItems: state.cart.items,
+  };
+};
+
+export default connect(mapStateToProps)(NavBar);

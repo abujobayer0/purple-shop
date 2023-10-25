@@ -18,6 +18,7 @@ import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import { useParams } from "react-router-dom";
 import useFetchProducts from "../hooks/useFetchProducts";
+import { useAddToCart } from "../hooks/useCart";
 
 const PurplePaper = styled(Paper)(({ theme }) => ({
   background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
@@ -61,6 +62,8 @@ const Price = styled(Typography)(({ theme }) => ({
 const Info = styled(Typography)(({ theme }) => ({
   color: "#555",
   marginTop: 5,
+  display: "flex",
+  flexDirection: "column",
   marginBottom: 5,
 }));
 
@@ -131,6 +134,7 @@ const ProductDetail = () => {
   const product = products.find((i) => i?.id === parseInt(itemId));
   const { title, description, price, pictures } = product;
   const [quantity, setQuantity] = useState(1);
+  const addToCart = useAddToCart();
 
   const handleQuantityChange = (event) => {
     const newQuantity = event.target.value;
@@ -148,7 +152,7 @@ const ProductDetail = () => {
   };
 
   const handleAddToCart = () => {
-    console.log(`Added ${quantity} ${title} to the cart.`);
+    addToCart(product, quantity);
   };
 
   return (
@@ -168,46 +172,66 @@ const ProductDetail = () => {
           <TextWrapper>
             <Title variant="h4" gutterBottom>
               {title}
-            </Title>
-
-            <Description variant="subtitle1" gutterBottom>
-              {description}
-            </Description>
-
+            </Title>{" "}
             <Price variant="h6" color="textSecondary">
               Price: ${price}
             </Price>
+            <Description variant="subtitle1" gutterBottom>
+              {description}
+            </Description>
+            <Box
+              display={"flex"}
+              justifyContent={"start"}
+              flexWrap={"wrap"}
+              gap={{ xs: 1, md: 5 }}
+              alignItems={"center"}
+              width={1}
+            >
+              <Info
+                variant="body2"
+                justifyContent={"center"}
+                color="textSecondary"
+              >
+                <Typography>Categories: </Typography>
+                <Typography>
+                  {product.categories.map((category) => (
+                    <CategoriesChip
+                      key={category}
+                      label={category}
+                      size="small"
+                    />
+                  ))}
+                </Typography>
+              </Info>
 
-            <Info variant="body2" color="textSecondary">
-              Categories:{" "}
-              {product.categories.map((category) => (
-                <CategoriesChip key={category} label={category} size="small" />
-              ))}
-            </Info>
+              <Info variant="body2" color="textSecondary">
+                <Typography>Collections: </Typography>
+                <Typography>
+                  {product.collections.map((collection) => (
+                    <CollectionChip
+                      key={collection}
+                      label={collection}
+                      size="small"
+                    />
+                  ))}
+                </Typography>
+              </Info>
 
-            <Info variant="body2" color="textSecondary">
-              Collections:{" "}
-              {product.collections.map((collection) => (
-                <CollectionChip
-                  key={collection}
-                  label={collection}
-                  size="small"
-                />
-              ))}
-            </Info>
+              <Info variant="body2" color="textSecondary">
+                <Typography>Tags: </Typography>
 
-            <Info variant="body2" color="textSecondary">
-              Tags:{" "}
-              {product.tags.map((tag) => (
-                <TagsChip
-                  key={tag}
-                  label={tag}
-                  size="small"
-                  icon={<LocalOfferIcon fontSize="small" color="white" />}
-                />
-              ))}
-            </Info>
-
+                <Typography>
+                  {product.tags.map((tag) => (
+                    <TagsChip
+                      key={tag}
+                      label={tag}
+                      size="small"
+                      icon={<LocalOfferIcon fontSize="small" color="white" />}
+                    />
+                  ))}
+                </Typography>
+              </Info>
+            </Box>
             <Info variant="body2" color="textSecondary">
               Quantity:{" "}
               <QuantityWrapper>
@@ -231,7 +255,6 @@ const ProductDetail = () => {
                 </IconBtn>
               </QuantityWrapper>
             </Info>
-
             <CartButton
               variant="contained"
               onClick={handleAddToCart}
