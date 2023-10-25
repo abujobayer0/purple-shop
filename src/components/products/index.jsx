@@ -1,8 +1,13 @@
 import React from "react";
 import { Grid, Container } from "@mui/material";
 import ProductCard from "../productCard";
+import Loader from "./loader";
 
-const Products = ({ Products }) => {
+const Products = ({ Products, loading }) => {
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <Container sx={{ padding: { xs: "50px 25px", md: "25px 0" } }}>
       <Grid container spacing={4}>

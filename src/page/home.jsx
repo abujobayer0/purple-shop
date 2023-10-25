@@ -7,13 +7,14 @@ import { Categories, Products, Collections, Tags } from "../components";
 
 const Home = () => {
   const [tag, setTag] = useState("");
-
   let queryUrl;
+
   if (tag !== "") {
     queryUrl = `/items?tag=${encodeURIComponent(tag)}`;
   }
+
   const url = queryUrl || "/items";
-  const products = useFetchProducts(url);
+  const { products, loading } = useFetchProducts(url);
   const categories = useFetchCategories();
   const tags = useFetchTags();
   const collections = useFetchCollection();
@@ -23,7 +24,7 @@ const Home = () => {
       <Categories categories={categories} />
       <Collections collections={collections} />
       <Tags active={tag} setTag={setTag} tags={tags} />
-      <Products Products={products} />
+      <Products Products={products} loading={loading} />
     </React.Fragment>
   );
 };

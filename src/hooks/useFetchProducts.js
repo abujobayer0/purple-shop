@@ -5,12 +5,13 @@ import { fetchProducts } from "../redux/actions/productsAction";
 const useFetchProducts = (url) => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
+  const loading = useSelector((state) => state.products.loading);
 
   useEffect(() => {
     dispatch(fetchProducts(url));
   }, [dispatch, url]);
 
-  return products;
+  return { products, loading };
 };
 
 export default useFetchProducts;

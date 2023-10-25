@@ -21,10 +21,14 @@ const Nav = styled(AppBar)(() => ({
 
 const StyledTypography = styled(Typography)(() => ({
   flexGrow: 1,
-  fontWeight: 600,
+  fontWeight: 800,
   display: "flex",
   alignItems: "center",
   fontSize: { xs: 15, md: 20 },
+  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  "-webkit-background-clip": "text",
+  "-webkit-text-fill-color": "transparent",
+  color: "white",
 }));
 
 const StyledShoppingCart = styled(ShoppingCartIcon)(() => ({
@@ -36,8 +40,13 @@ const StyledShoppingCart = styled(ShoppingCartIcon)(() => ({
 
 const StyledContainer = styled(Container)(() => ({ padding: 0 }));
 
-const StyledToolbar = styled(Toolbar)(() => ({
-  width: "100%",
+const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+  [theme.breakpoints.up("md")]: {
+    width: "100%",
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "90%",
+  },
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
@@ -69,18 +78,11 @@ const NavBar = ({ cartItems }) => {
       <Nav position="static">
         <StyledContainer>
           <StyledToolbar>
-            <Link to={"/"}>
-              <LogoWrapper>
-                <img
-                  src="https://i.ibb.co/K0DT2fS/pp.jpg"
-                  style={{ width: 50 }}
-                  alt="logo"
-                />
-                <StyledTypography variant="h6" color={"black"} component="div">
-                  PURPLE SHOP
-                </StyledTypography>
-              </LogoWrapper>
-            </Link>
+            <LogoWrapper>
+              <StyledTypography variant="h6" color={"black"} component="div">
+                PURPLE SHOP
+              </StyledTypography>
+            </LogoWrapper>
 
             <Box>
               <Link to={"/cart"}>

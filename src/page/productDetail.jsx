@@ -130,7 +130,7 @@ const TextWrapper = styled(Box)(({ theme }) => ({
 
 const ProductDetail = () => {
   const { itemId } = useParams();
-  const products = useFetchProducts("/items");
+  const { products } = useFetchProducts("/items");
   const product = products.find((i) => i?.id === parseInt(itemId));
   const { title, description, price, pictures } = product;
   const [quantity, setQuantity] = useState(1);
@@ -174,7 +174,7 @@ const ProductDetail = () => {
               {title}
             </Title>{" "}
             <Price variant="h6" color="textSecondary">
-              Price: ${price}
+              Price: €{price}
             </Price>
             <Description variant="subtitle1" gutterBottom>
               {description}

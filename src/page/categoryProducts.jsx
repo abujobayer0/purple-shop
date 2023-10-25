@@ -3,16 +3,24 @@ import { useParams } from "react-router-dom";
 import useFetchProducts from "../hooks/useFetchProducts";
 import { Products, BackButton } from "../components";
 import { Container } from "@mui/material";
+import Loader from "../components/products/loader";
 
 const CategoryProducts = () => {
   const { categoryId } = useParams();
-  const categoryParam = encodeURIComponent(categoryId);
-  const products = useFetchProducts(`/items?category=${categoryParam}`);
+  const { products, loading } = useFetchProducts(`/items`);
+
+  const showProducts = products.filter((product) =>
+    product.categories.includes(categoryId)
+  );
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <Container>
       <BackButton />
-      <Products Products={products} />
+      <Products Products={showProducts} />
     </Container>
   );
 };

@@ -1,39 +1,41 @@
 import React from "react";
-import { Container, Button, Typography, styled } from "@mui/material";
+import { Container, Typography, styled, Chip } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const Title = styled(Typography)(() => ({
-  marginBottom: 3,
-  color: "#333",
+const Title = styled(Typography)(({ theme }) => ({
+  marginBottom: theme.spacing(3),
   fontWeight: 600,
-}));
-
-const CollectionButton = styled(Button)(({ theme }) => ({
+  textTransform: "uppercase",
   background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  "-webkit-background-clip": "text",
+  "-webkit-text-fill-color": "transparent",
   color: "white",
-  width: 300,
-  margin: "10px",
-  borderRadius: "40px",
-  fontSize: "1.2rem",
-  textTransform: "none",
-  boxShadow: "0 5px 15px rgba(0, 0, 0, 0.2)",
-  transition: "transform 0.2s",
-  "&:hover": {
-    backgroundColor: theme.palette.secondary.dark,
-    transform: "scale(1.05)",
-  },
 }));
 
 const Collections = ({ collections }) => {
   return (
-    <Container>
+    <Container sx={{ marginBottom: 4 }}>
       <Title variant="h4">Collections</Title>
-
-      {collections?.map((collection, indx) => (
-        <Link key={indx} to={`/collection/${collection}`}>
-          <CollectionButton variant="contained">{collection}</CollectionButton>
-        </Link>
-      ))}
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {collections?.map((collection, indx) => (
+          <Link
+            key={indx}
+            to={`/collection/${collection}`}
+            style={{ textDecoration: "none" }}
+          >
+            <Chip
+              label={collection}
+              variant="outlined"
+              style={{
+                marginRight: "16px",
+                marginBottom: "16px",
+                borderRadius: "20px",
+                border: `2px solid lightgray`,
+              }}
+            />
+          </Link>
+        ))}
+      </div>
     </Container>
   );
 };
