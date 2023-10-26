@@ -9,10 +9,18 @@ const Products = ({ Products, loading }) => {
   }
 
   return (
-    <Container sx={{ padding: { xs: "50px 25px", md: "25px 0" } }}>
-      <Grid container spacing={4}>
+    <Container
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        marginBottom: 10,
+      }}
+    >
+      <Grid container display={"flex"} justifyContent={"center"} spacing={4}>
         {Products?.map((Product, index) => (
-          <Grid item key={index} xs={6} sm={4} md={4}>
+          <Grid item key={index} xs={6} sm={5} lg={4}>
             <ProductCard Product={Product} />
           </Grid>
         ))}

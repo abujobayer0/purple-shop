@@ -1,94 +1,218 @@
 import React from "react";
-import { Card, styled, Typography, Box } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Card, Typography, Box, Button, Chip, styled } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import { useAddToCart } from "../../hooks/useCart";
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import ShoppingCart from "@mui/icons-material/ShoppingCart";
+import FileDownloadDoneIcon from "@mui/icons-material/FileDownloadDone";
+import AddIcon from "@mui/icons-material/Add";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import RemoveIcon from "@mui/icons-material/Remove";
 
-const StyledCard = styled(Card)(() => ({
-  position: "relative",
+const ProductCardContainer = styled(Card)(({ theme }) => ({
   width: "100%",
-  height: "auto",
-  boxShadow: "0px 1px 13px rgba(0, 0, 0, 0.1)",
-  cursor: "pointer",
-  transition: "all 120ms",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "start",
+  position: "relative",
+  textAlign: "start",
+  padding: 10,
+  marginLeft: "-10px",
+  height: "100%",
+  justifyContent: "space-between",
+}));
+
+const QuantityContainer = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  width: "50%",
+  [theme.breakpoints.down("md")]: {
+    paddingLeft: 0,
+    width: "100%",
+  },
+  paddingLeft: 10,
+  gap: "0.44rem",
+}));
+
+const QuantityControl = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
+  gap: "1.25rem",
+  marginBottom: "0.5em",
+  height: "40px",
+  width: "100%",
+  textAlign: "center",
+  color: "#38453ec9",
+  marginTop: 10,
+  paddding: 5,
+  borderRadius: 5,
+  overflow: "hidden",
+  border: "1px solid lightgray",
+}));
+
+const QuantityButton = styled(Button)(({ theme }) => ({
+  cursor: " pointer",
+  padding: "0.50rem",
+  background: "linear-gradient(to bottom, #C6A4E6, #BAA3E6)",
+  color: "#fff",
+  transition: "background 0.5s ease-in-out",
+  "&:hover": {
+    background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  },
+  borderRadius: "0px 0px 0px 0px",
+}));
+
+const QuantityNumber = styled(Typography)(({ theme }) => ({
+  color: "#38453ec9",
+  fontWeight: "bold",
+  lineHeight: "77.5%",
+  letterSpacing: "0.01rem",
+  textTransform: "uppercase",
+  fontSize: "1.25rem",
+  width: "100%",
+  display: "flex",
   justifyContent: "center",
-  background: "#fff",
-  padding: "2em 0.5em",
-  paddingBottom: "3.4em",
-
-  "&:after": {
-    content: `"Add to Cart"`,
-    paddingTop: "1.25em",
-    paddingLeft: "1.25em",
-    position: "absolute",
-    left: 0,
-    bottom: "-60px",
-    background: "rgb(248, 139, 286)",
-    color: "#fff",
-    height: "2.5em",
-    width: "100%",
-    transition: "all 80ms",
-    fontWeight: 600,
-    textTransform: "uppercase",
-    opacity: 0,
-  },
-
-  "&:hover:after": {
-    bottom: 0,
-    opacity: 1,
-  },
-
-  "&:active": {
-    transform: "scale(0.98)",
-  },
-
-  "&:active:after": {
-    content: `"Added !"`,
-    height: "3.125em",
-  },
+  alignItems: "center",
 }));
 
-const Title = styled(Typography)(() => ({
-  fontFamily: " Arial, Helvetica, sans-serif",
-  fontSize: "0.9em",
+const Title = styled(Typography)(({ theme }) => ({
+  fontWeight: "bold",
+  fontSize: "1rem",
+  margin: "10px 0",
+  cursor: "pointer",
+  paddingLeft: 10,
+  whiteSpace: "wrap",
+  [theme.breakpoints.down("md")]: {
+    paddingLeft: 0,
+  },
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+}));
+const Price = styled(Typography)(({ theme }) => ({
+  fontWeight: "bold",
+  fontSize: "1.2rem",
+  paddingLeft: 10,
+  [theme.breakpoints.down("md")]: {
+    paddingLeft: 0,
+  },
+  fontStyle: "italic",
+  color: "#8E24AA",
+}));
+
+const TagsContainer = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "center",
+  flexWrap: "wrap",
   position: "absolute",
-  left: "0.625em",
-  bottom: " 1.875em",
-  fontWeight: 400,
-  color: "#000",
-  textAlign: "start",
+  bottom: -12,
+  right: 5,
 }));
 
-const PriceLabel = styled(Typography)(() => ({
-  fontFamily: `Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif`,
-  fontSize: "0.9em",
-  position: "absolute",
-  left: "0.625em",
-  bottom: "0.625em",
-  color: "#000",
+const Tag = styled(Chip)(({ theme }) => ({
+  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  margin: "2px",
+  fontSize: 13,
+  height: 25,
+  [theme.breakpoints.down("md")]: {
+    fontSize: 10,
+  },
 }));
 
-const ImageContainer = styled(Box)(() => ({
-  background: "rgb(248, 139, 286)",
-  display: "grid",
-  placeItems: "center",
+const ButtonContainer = styled(Box)(({ theme }) => ({
+  display: "flex",
+  paddingLeft: 10,
+  width: "100%",
+  justifyContent: "start",
+  [theme.breakpoints.down("md")]: {
+    paddingLeft: 0,
+    flexDirection: "column",
+  },
+}));
+
+const ResponsiveLocalOfferIcon = styled(LocalOfferIcon)(({ theme }) => ({
+  fontSize: 14,
 }));
 
 const ProductCard = ({ Product }) => {
+  const [quantity, setQuantity] = React.useState(1);
+  const addToCart = useAddToCart();
+  const navigate = useNavigate();
+
+  const handleAddToCart = () => {
+    addToCart(Product, quantity);
+  };
+
+  const handleIncreaseQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const handleDecreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const handleCartClick = (e) => {
+    const button = e.currentTarget;
+    button.classList.add("clicked");
+    setTimeout(() => {
+      handleAddToCart();
+      button.classList.remove("clicked");
+    }, 2000);
+  };
+
+  const handleNavigate = (id) => {
+    navigate(`/item/${Product.id}`);
+  };
+
   return (
-    <StyledCard>
-      <Link to={`/item/${Product.id}`}>
-        <ImageContainer>
-          <img
-            src={Product?.pictures[0]}
-            alt={Product?.title}
-            style={{ width: "100%", height: "auto" }}
-          />
-        </ImageContainer>
-        <Title variant="h6">{Product?.title}</Title>
-        <PriceLabel variant="h6"> £{Product?.price}</PriceLabel>
+    <ProductCardContainer>
+      <Link to={`/item/${Product.id}`} style={{ position: "relative" }}>
+        <img
+          src={Product.pictures[0]}
+          alt={Product.title}
+          style={{ width: "100%", height: "auto" }}
+        />
+        <TagsContainer>
+          {Product.tags.map((tag) => (
+            <Tag
+              icon={<ResponsiveLocalOfferIcon color="white" />}
+              label={tag}
+              key={tag}
+              color="primary"
+            />
+          ))}
+        </TagsContainer>
       </Link>
-    </StyledCard>
+      <>
+        <Title onClick={() => handleNavigate(Product.id)} variant="h6">
+          {Product.title.slice(0, 35)}
+        </Title>
+        <Price variant="h6">€{Product.price}</Price>
+      </>
+      <QuantityContainer>
+        <QuantityControl>
+          <QuantityButton onClick={handleDecreaseQuantity}>
+            <RemoveIcon />
+          </QuantityButton>
+          <QuantityNumber>{quantity}</QuantityNumber>
+          <QuantityButton onClick={handleIncreaseQuantity}>
+            <AddIcon />
+          </QuantityButton>
+        </QuantityControl>
+      </QuantityContainer>
+      <ButtonContainer>
+        <button className="cart-button" onClick={handleCartClick}>
+          <span className="add-to-cart">Add to cart</span>
+          <span className="added">
+            <FileDownloadDoneIcon />
+          </span>
+          <ShoppingCart className="fas fa-shopping-cart" />
+          <ShoppingBasketIcon className="fas fa-box" />
+        </button>
+      </ButtonContainer>
+    </ProductCardContainer>
   );
 };
 

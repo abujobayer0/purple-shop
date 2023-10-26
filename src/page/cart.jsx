@@ -17,9 +17,9 @@ import {
   styled,
 } from "@mui/material";
 import { connect } from "react-redux";
-import { useRemoveFromCart, useUpdateCartItemQuantity } from "../hooks/useCart";
 import { Link } from "react-router-dom";
 import { BackButton } from "../components";
+import { useRemoveFromCart, useUpdateCartItemQuantity } from "../hooks/useCart";
 
 const CartsWrapper = styled(Paper)(() => ({
   marginTop: "20px",
@@ -33,6 +33,83 @@ const OrderSummeryWrapper = styled(Paper)(() => ({
   position: "sticky",
   top: "20px",
 }));
+
+const RemoveButton = styled(Button)(() => ({
+  fontWeight: "bold",
+  color: "#FF0000",
+  textDecoration: "none",
+  paddingLeft: 10,
+  paddingRight: 10,
+}));
+
+const CheckoutButton = styled(Button)(() => ({
+  width: "100%",
+  textTransform: "uppercase",
+  fontWeight: "bold",
+  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  color: "white",
+}));
+
+const ApplyButton = styled(Button)(() => ({
+  width: "100%",
+  textTransform: "uppercase",
+  fontWeight: "bold",
+  background: "lightgray",
+  color: "black",
+}));
+
+const QuantityButtonGroup = styled(ButtonGroup)(() => ({
+  "& button": {
+    borderColor: "lightgray",
+    color: "white",
+    background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  },
+  "& button:first-of-type": {
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
+  },
+  "& button:last-of-type": {
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
+  },
+  "& button:not(:first-of-type):not(:last-of-type)": {
+    borderRadius: 0,
+  },
+  "& span": {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "10px 20px",
+  },
+}));
+
+const CostWrappper = styled(Grid)(() => ({
+  justifyContent: "space-between",
+  padding: "10px 0",
+}));
+
+const ImageGrid = styled(Grid)(({ theme }) => ({
+  display: "flex",
+  [theme.breakpoints.down("md")]: { display: "none" },
+}));
+
+const CartTableContainer = styled(TableContainer)(() => ({
+  boxShadow: "none",
+  padding: 0,
+  border: "1px solid lightgray",
+}));
+
+const CartTableCell = styled(TableCell)(() => ({ textAlign: "center" }));
+
+const IntroBox = styled(Box)(() => ({
+  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  color: "white",
+  padding: "10px 25px",
+  borderRadius: 5,
+  marginBottom: 10,
+}));
+
+const PromoFieldWrapper = styled(Box)(() => ({ padding: "20px 0" }));
 
 const TableWrapper = styled(Box)(() => ({
   display: "flex",
@@ -48,15 +125,7 @@ const ProductTitle = styled(Box)(({ theme }) => ({
   },
 }));
 
-const RemoveButton = styled(Button)(() => ({
-  fontWeight: "bold",
-  color: "#FF0000",
-  textDecoration: "none",
-  paddingLeft: 10,
-  paddingRight: 10,
-}));
-
-const CartTableCell = styled(TableCell)(() => ({ textAlign: "center" }));
+const ItemText = styled(Typography)(() => ({ textTransform: "uppercase" }));
 
 const Cart = ({ cartItems }) => {
   const removeFromCart = useRemoveFromCart();
@@ -84,34 +153,18 @@ const Cart = ({ cartItems }) => {
       <Grid container spacing={5}>
         <Grid item xs={12} sm={12} lg={8}>
           <CartsWrapper>
-            <Box
-              sx={{
-                background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
-                color: "white",
-                padding: "10px 25px",
-                borderRadius: 1,
-                mb: 1,
-              }}
-            >
+            <IntroBox>
               <Typography variant="h5" gutterBottom>
                 Shopping Cart
               </Typography>
               <Typography variant="h6" gutterBottom>
                 {cartItems.length} Item{cartItems.length !== 1 ? "s" : ""}
               </Typography>
-            </Box>
+            </IntroBox>
 
             <TableWrapper>
-              <TableContainer
-                sx={{
-                  boxShadow: "none",
-                  padding: 0,
-                  border: "1px solid lightgray",
-                }}
-                component={Paper}
-              >
+              <CartTableContainer component={Paper}>
                 <Table>
-                  {" "}
                   <TableHead>
                     <TableRow>
                       <TableCell>Product</TableCell>
@@ -125,18 +178,13 @@ const Cart = ({ cartItems }) => {
                       <TableRow key={item.product.id}>
                         <TableCell>
                           <Grid container alignItems="center" spacing={1}>
-                            <Grid
-                              item
-                              sx={{ display: { xs: "none", md: "flex" } }} // Hide the image on mobile
-                              sm={5}
-                              md={4}
-                            >
+                            <ImageGrid item sm={5} md={4}>
                               <img
                                 src={item.product.pictures[0]}
                                 alt={item.product.title}
                                 style={{ height: "144px" }}
                               />
-                            </Grid>
+                            </ImageGrid>
                             <Grid item xs={12} sm={7} md={8}>
                               <Link to={`/item/${item.product.id}`}>
                                 <ProductTitle variant="subtitle1">
@@ -154,34 +202,9 @@ const Cart = ({ cartItems }) => {
                           </Grid>
                         </TableCell>
                         <CartTableCell>
-                          <ButtonGroup
+                          <QuantityButtonGroup
                             variant="outlined"
                             aria-label="outlined button group"
-                            sx={{
-                              "& button": {
-                                borderColor: "lightgray", // Border color for all buttons
-                                color: "white", // Text color for all buttons (white)
-                                background:
-                                  "linear-gradient(to bottom, #8E24AA, #673AB7)", // Gradient background
-                              },
-                              "& button:first-of-type": {
-                                borderTopRightRadius: 0,
-                                borderBottomRightRadius: 0,
-                              },
-                              "& button:last-of-type": {
-                                borderTopLeftRadius: 0,
-                                borderBottomLeftRadius: 0,
-                              },
-                              "& button:not(:first-of-type):not(:last-of-type)": {
-                                borderRadius: 0,
-                              },
-                              "& span": {
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                padding: "10px 20px",
-                              },
-                            }}
                           >
                             <Button
                               onClick={() =>
@@ -206,7 +229,7 @@ const Cart = ({ cartItems }) => {
                             >
                               +
                             </Button>
-                          </ButtonGroup>
+                          </QuantityButtonGroup>
                         </CartTableCell>
                         <CartTableCell>
                           €{parseInt(item.product.price).toFixed(2)}
@@ -222,7 +245,7 @@ const Cart = ({ cartItems }) => {
                     ))}
                   </TableBody>
                 </Table>
-              </TableContainer>
+              </CartTableContainer>
             </TableWrapper>
           </CartsWrapper>
         </Grid>
@@ -233,12 +256,7 @@ const Cart = ({ cartItems }) => {
             </Typography>
 
             <Grid container gap={20} justify="space-between">
-              <Typography
-                variant="overline"
-                sx={{ textTransform: "uppercase" }}
-              >
-                Items {cartItems.length}
-              </Typography>
+              <ItemText variant="overline">Items {cartItems.length}</ItemText>
               <Typography variant="overline">
                 €
                 {cartItems
@@ -249,37 +267,22 @@ const Cart = ({ cartItems }) => {
                   .toFixed(2)}
               </Typography>
             </Grid>
-            <Box sx={{ padding: "20px 0" }}>
+            <PromoFieldWrapper>
               <TextField
                 id="promo"
                 label="Promo Code"
                 variant="outlined"
                 fullWidth
               />
-            </Box>
+            </PromoFieldWrapper>
 
-            <Button
-              variant="contained"
-              disabled
-              sx={{
-                width: "100%",
-                textTransform: "uppercase",
-                fontWeight: "bold",
-                background: "lightgray",
-                color: "black",
-              }}
-            >
+            <ApplyButton variant="contained" disabled>
               Apply
-            </Button>
+            </ApplyButton>
 
             <hr style={{ marginTop: "20px" }} />
 
-            <Grid
-              container
-              gap={20}
-              justify="space-between"
-              sx={{ padding: "10px 0" }}
-            >
+            <CostWrappper container gap={20}>
               <Typography variant="overline">Total cost</Typography>
               <Typography variant="overline">
                 €
@@ -290,21 +293,11 @@ const Cart = ({ cartItems }) => {
                   )
                   .toFixed(2)}
               </Typography>
-            </Grid>
+            </CostWrappper>
 
-            <Button
-              variant="contained"
-              color="primary"
-              style={{
-                width: "100%",
-                textTransform: "uppercase",
-                fontWeight: "bold",
-                background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
-                color: "white",
-              }}
-            >
+            <CheckoutButton variant="contained" color="primary">
               Checkout
-            </Button>
+            </CheckoutButton>
           </OrderSummeryWrapper>
         </Grid>
       </Grid>

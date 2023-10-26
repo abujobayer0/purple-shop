@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Typography, Chip, styled } from "@mui/material";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 
 const Title = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(3),
@@ -11,35 +12,39 @@ const Title = styled(Typography)(({ theme }) => ({
   color: "white",
 }));
 
+const TagsChip = styled(Chip)(({ theme }) => ({
+  padding: 1,
+  marginRight: 10,
+  marginBottom: 10,
+  fontStyle: "italic",
+  color: "#444",
+}));
+
+const Tag = ({ label, onClick, isActive }) => (
+  <TagsChip
+    label={label}
+    size="small"
+    onClick={onClick}
+    sx={{
+      background: isActive && "linear-gradient(to bottom, #8E24AA, #673AB7)",
+      color: isActive && "white",
+    }}
+    variant={isActive ? "contained" : "outlined"}
+    icon={<LocalOfferIcon fontSize="small" color="white" />}
+  />
+);
+
 const Tags = ({ tags, setTag, active }) => {
   return (
     <Container>
-      <Title variant="h4">Tags</Title>{" "}
-      <Chip
-        color="secondary"
-        label="All"
-        onClick={() => setTag("")}
-        variant={active === "" ? "contained" : "outlined"}
-        style={{
-          marginRight: "16px",
-          marginBottom: "16px",
-          borderRadius: "20px",
-          border: `2px solid lightgray`,
-        }}
-      />
+      <Title variant="h4">Tags</Title>
+      <Tag label="All" onClick={() => setTag("")} isActive={active === ""} />
       {tags?.map((tag, indx) => (
-        <Chip
+        <Tag
           key={indx}
-          color="secondary"
           label={tag}
           onClick={() => setTag(tag)}
-          variant={active === tag ? "contained" : "outlined"}
-          style={{
-            marginRight: "16px",
-            marginBottom: "16px",
-            borderRadius: "20px",
-            border: `2px solid lightgray`,
-          }}
+          isActive={active === tag}
         />
       ))}
     </Container>

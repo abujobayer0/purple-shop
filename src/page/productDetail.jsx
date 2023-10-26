@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Grid,
@@ -33,6 +33,9 @@ const PurplePaper = styled(Paper)(({ theme }) => ({
 const Title = styled(Typography)(({ theme }) => ({
   fontWeight: "bold",
   fontSize: "2.8rem",
+  [theme.breakpoints.down("md")]: {
+    fontSize: "1.8rem",
+  },
   color: "#333",
 }));
 
@@ -107,6 +110,8 @@ const QuantityControl = styled(Box)(({ theme }) => ({
   color: "#38453ec9",
   marginTop: 10,
   paddding: 5,
+  borderRadius: 5,
+  overflow: "hidden",
   border: "1px solid lightgray",
 }));
 
@@ -141,6 +146,9 @@ const TextWrapper = styled(Box)(({ theme }) => ({
   alignItems: "start",
   border: "1px solid lightgray",
   padding: 50,
+  [theme.breakpoints.down("md")]: {
+    padding: 30,
+  },
   borderRadius: 5,
   marginBottom: 50,
 }));
@@ -176,6 +184,13 @@ const ProductDetail = () => {
     }, 2000);
   };
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <Container maxWidth="lg">
       <BackButton />
@@ -205,7 +220,7 @@ const ProductDetail = () => {
               display={"flex"}
               justifyContent={"start"}
               flexWrap={"wrap"}
-              gap={{ xs: 1, lg: 5 }}
+              gap={{ xs: 1, md: 0, lg: 5 }}
               alignItems={"center"}
               width={1}
             >

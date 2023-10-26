@@ -57,7 +57,10 @@ code {
   padding: 10px;
   width: 100%;
   height: 40px;
+  text-transform: uppercase;
   border: 0;
+  font-size: 10px;
+  font-weight: 600;
   border-radius: 5px;
   background: linear-gradient(to bottom, #8e24aa, #673ab7);
   color: white;
@@ -68,7 +71,8 @@ code {
 }
 @media (min-width: 1200px) {
   .cart-button {
-    width: 50%;
+    width: 100%;
+    font-size: 10px;
   }
 }
 .cart-button:hover {
