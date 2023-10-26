@@ -11,6 +11,11 @@ const Wrapper = styled(Box)(() => ({
 const BackBtn = styled(Button)(() => ({
   background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
   color: "white",
+  height: "40px",
+  border: "none",
+  "&:hover": {
+    border: "none",
+  },
 }));
 
 const BackButton = () => {

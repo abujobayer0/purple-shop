@@ -39,14 +39,21 @@ const TableWrapper = styled(Box)(() => ({
   justifyContent: "center",
 }));
 
-const ProductTitle = styled(Box)(() => ({
+const ProductTitle = styled(Box)(({ theme }) => ({
   fontWeight: "bold",
+  paddingLeft: 10,
+  paddingRight: 10,
+  [theme.breakpoints.up("md")]: {
+    minWidth: 200,
+  },
 }));
 
 const RemoveButton = styled(Button)(() => ({
   fontWeight: "bold",
   color: "#FF0000",
   textDecoration: "none",
+  paddingLeft: 10,
+  paddingRight: 10,
 }));
 
 const CartTableCell = styled(TableCell)(() => ({ textAlign: "center" }));

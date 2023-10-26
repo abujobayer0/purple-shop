@@ -4,12 +4,10 @@ import {
   Grid,
   Paper,
   Typography,
-  Button,
-  TextField,
-  IconButton,
   Box,
   styled,
   Chip,
+  Button,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -19,6 +17,8 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import { useParams } from "react-router-dom";
 import useFetchProducts from "../hooks/useFetchProducts";
 import { useAddToCart } from "../hooks/useCart";
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import FileDownloadDoneIcon from "@mui/icons-material/FileDownloadDone";
 
 const PurplePaper = styled(Paper)(({ theme }) => ({
   background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
@@ -28,18 +28,6 @@ const PurplePaper = styled(Paper)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-}));
-
-const CartButton = styled(Button)(({ theme }) => ({
-  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
-  height: 50,
-  color: "white",
-  [theme.breakpoints.down("xs")]: {
-    width: "100%",
-  },
-  [theme.breakpoints.up("md")]: {
-    width: 220,
-  },
 }));
 
 const Title = styled(Typography)(({ theme }) => ({
@@ -67,6 +55,18 @@ const Info = styled(Typography)(({ theme }) => ({
   marginBottom: 5,
 }));
 
+const QuantityInfo = styled(Typography)(({ theme }) => ({
+  color: "#555",
+  marginTop: 5,
+  display: "flex",
+  flexDirection: "column",
+  marginBottom: 5,
+  width: "100%",
+  [theme.breakpoints.up("lg")]: {
+    width: "50%",
+  },
+}));
+
 const CategoriesChip = styled(Chip)(({ theme }) => ({
   background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
   color: "white",
@@ -88,34 +88,51 @@ const TagsChip = styled(Chip)(({ theme }) => ({
   color: "white",
 }));
 
-const QuantityField = styled(TextField)(({ theme }) => ({
-  flex: 1,
-  width: 100,
+const QuantityContainer = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  width: "100%",
+  gap: "0.44rem",
+}));
+
+const QuantityControl = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
+  gap: "1.25rem",
+  marginBottom: "0.5em",
+  height: "40px",
+  width: "100%",
+  textAlign: "center",
+  color: "#38453ec9",
+  marginTop: 10,
+  paddding: 5,
+  border: "1px solid lightgray",
+}));
+
+const QuantityButton = styled(Button)(({ theme }) => ({
+  cursor: " pointer",
+  padding: "0.50rem",
+  background: "linear-gradient(to bottom, #C6A4E6, #BAA3E6)",
+  color: "#fff",
+  transition: "background 0.5s ease-in-out",
+  "&:hover": {
+    background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  },
+  borderRadius: "0px 0px 0px 0px",
+}));
+
+const QuantityNumber = styled(Typography)(({ theme }) => ({
+  color: "#38453ec9",
+  fontWeight: "bold",
+  lineHeight: "77.5%",
+  letterSpacing: "0.01rem",
+  textTransform: "uppercase",
+  fontSize: "1.25rem",
+  width: "100%",
+  display: "flex",
   justifyContent: "center",
-}));
-
-const IconBtn = styled(IconButton)(({ theme }) => ({
-  background: "#EDE4FF",
-  color: "#6527BE",
-  borderRadius: "0 5px 5px 0",
-}));
-
-const QuantityWrapper = styled(Box)(({ theme }) => ({
-  display: "flex",
   alignItems: "center",
-  marginTop: "1rem",
-  background: "rgba(237, 228, 255, 0.9)",
-  borderRadius: 5,
-  paddingLeft: 1,
-  paddingRight: 1,
-  [theme.breakpoints.down("xs")]: {
-    width: "100%",
-  },
-  [theme.breakpoints.up("md")]: {
-    width: 220,
-  },
 }));
 
 const TextWrapper = styled(Box)(({ theme }) => ({
@@ -136,11 +153,6 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const addToCart = useAddToCart();
 
-  const handleQuantityChange = (event) => {
-    const newQuantity = event.target.value;
-    setQuantity(newQuantity);
-  };
-
   const handleIncreaseQuantity = () => {
     setQuantity(quantity + 1);
   };
@@ -155,9 +167,19 @@ const ProductDetail = () => {
     addToCart(product, quantity);
   };
 
+  const handleCartClick = (e) => {
+    const button = e.currentTarget;
+    button.classList.add("clicked");
+    setTimeout(() => {
+      handleAddToCart();
+      button.classList.remove("clicked");
+    }, 2000);
+  };
+
   return (
     <Container maxWidth="lg">
       <BackButton />
+
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <PurplePaper>
@@ -183,7 +205,7 @@ const ProductDetail = () => {
               display={"flex"}
               justifyContent={"start"}
               flexWrap={"wrap"}
-              gap={{ xs: 1, md: 5 }}
+              gap={{ xs: 1, lg: 5 }}
               alignItems={"center"}
               width={1}
             >
@@ -206,6 +228,7 @@ const ProductDetail = () => {
 
               <Info variant="body2" color="textSecondary">
                 <Typography>Collections: </Typography>
+
                 <Typography>
                   {product.collections.map((collection) => (
                     <CollectionChip
@@ -232,36 +255,30 @@ const ProductDetail = () => {
                 </Typography>
               </Info>
             </Box>
-            <Info variant="body2" color="textSecondary">
+            <QuantityInfo variant="body2" color="textSecondary">
               Quantity:{" "}
-              <QuantityWrapper>
-                <IconBtn onClick={handleDecreaseQuantity}>
-                  <RemoveIcon />
-                </IconBtn>
-                <QuantityField
-                  variant="outlined"
-                  type="number"
-                  value={quantity}
-                  onChange={handleQuantityChange}
-                  InputProps={{
-                    inputProps: { min: 1 },
-                    sx: {
-                      "& fieldset": { border: "none" },
-                    },
-                  }}
-                />
-                <IconBtn onClick={handleIncreaseQuantity}>
-                  <AddIcon />
-                </IconBtn>
-              </QuantityWrapper>
-            </Info>
-            <CartButton
-              variant="contained"
-              onClick={handleAddToCart}
-              startIcon={<ShoppingCart />}
-            >
-              Add to Cart
-            </CartButton>
+              <QuantityContainer>
+                <QuantityControl>
+                  <QuantityButton onClick={handleDecreaseQuantity}>
+                    <RemoveIcon />
+                  </QuantityButton>
+
+                  <QuantityNumber>{quantity}</QuantityNumber>
+
+                  <QuantityButton onClick={handleIncreaseQuantity}>
+                    <AddIcon />
+                  </QuantityButton>
+                </QuantityControl>
+              </QuantityContainer>
+            </QuantityInfo>
+            <button className="cart-button" onClick={handleCartClick}>
+              <span className="add-to-cart">Add to cart</span>
+              <span className="added">
+                <FileDownloadDoneIcon />
+              </span>
+              <ShoppingCart className="fas fa-shopping-cart" />
+              <ShoppingBasketIcon className="fas fa-box" />
+            </button>
           </TextWrapper>
         </Grid>
       </Grid>
