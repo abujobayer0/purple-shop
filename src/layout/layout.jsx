@@ -44,10 +44,10 @@ const Layout = () => {
   }
 
   const url = queryUrl || "/items";
-  const {} = useFetchProducts(url);
   const categories = useFetchCategories();
   const tags = useFetchTags();
   const collections = useFetchCollection();
+  useFetchProducts(url);
 
   const openDrawer = () => {
     setIsDrawerOpen(true);
@@ -72,9 +72,14 @@ const Layout = () => {
               onClose={closeDrawer}
             >
               <Sidebar>
-                <Categories closeDrawer={closeDrawer} categories={categories} />
+                <Categories
+                  closeDrawer={closeDrawer}
+                  setTag={setTag}
+                  categories={categories}
+                />
                 <Collections
                   closeDrawer={closeDrawer}
+                  setTag={setTag}
                   collections={collections}
                 />
               </Sidebar>
@@ -83,8 +88,13 @@ const Layout = () => {
           <Hidden mdDown>
             <Grid item xs={3}>
               <Sidebar>
-                <Categories closeDrawer={closeDrawer} categories={categories} />
+                <Categories
+                  closeDrawer={closeDrawer}
+                  setTag={setTag}
+                  categories={categories}
+                />
                 <Collections
+                  setTag={setTag}
                   closeDrawer={closeDrawer}
                   collections={collections}
                 />

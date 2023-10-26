@@ -6,7 +6,7 @@ import { Loader } from "../index";
 const ProductsGrid = styled(Grid)(() => ({
   marginTop: 8,
   display: "flex",
-  marginBottom: 24,
+  marginBottom: 90,
   justifyContent: "start",
 }));
 

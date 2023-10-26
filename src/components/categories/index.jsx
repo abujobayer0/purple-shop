@@ -1,11 +1,16 @@
 import React from "react";
-import { Container, Typography, styled, Box } from "@mui/material";
+import { Container, Typography, styled, Box, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 const Title = styled(Typography)(({ theme }) => ({
   color: "white",
   fontWeight: 600,
+  marginBottom: 8,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
   textTransform: "uppercase",
 }));
 
@@ -21,22 +26,18 @@ const CategoryWrapper = styled(Box)(({ theme }) => ({
   height: 40,
   width: "100%",
   display: "flex",
+  cursor: "pointer",
   borderRadius: 5,
   alignItems: "center",
   border: "1px solid lightgray",
   transition: "background 0.3s",
   justifyContent: "space-between",
-  "&:hover": {
-    background: "#f0f0f0",
-    borderColor: "lightgray",
-  },
 }));
 
 const Category = styled(Typography)(({ theme }) => ({
   fontSize: 12,
   color: "white",
   fontWeight: 600,
-  cursor: "pointer",
   padding: "0 25px",
   textTransform: "uppercase",
   background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
@@ -62,18 +63,30 @@ const StyledContainer = styled(Container)(({ theme }) => ({
   [theme.breakpoints.up("md")]: { paddingRight: 18 },
 }));
 
-const Categories = ({ categories, closeDrawer }) => {
+const Categories = ({ categories, setTag, closeDrawer }) => {
   const navigate = useNavigate();
 
   const handleNavigate = (category) => {
     navigate(`/category/${category}`);
+    setTag("");
+    closeDrawer();
+  };
+
+  const handleReset = () => {
+    navigate("/");
+    setTag("");
     closeDrawer();
   };
 
   return (
     <StyledContainer>
       <IntroBox>
-        <Title variant="h6">Categories</Title>
+        <Title variant="h6">
+          Categories
+          <IconButton onClick={handleReset}>
+            <RestartAltIcon />
+          </IconButton>
+        </Title>
       </IntroBox>
       <StyledBox>
         {categories?.map((category, indx) => (

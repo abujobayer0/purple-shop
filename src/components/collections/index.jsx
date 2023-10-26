@@ -60,11 +60,12 @@ const StyledContainer = styled(Container)(({ theme }) => ({
   [theme.breakpoints.up("md")]: { paddingRight: 18 },
 }));
 
-const Collections = ({ collections, closeDrawer }) => {
+const Collections = ({ collections, setTag, closeDrawer }) => {
   const navigate = useNavigate();
 
   const handleNavigate = (collection) => {
     navigate(`/collection/${collection}`);
+    setTag("");
     closeDrawer();
   };
 

@@ -28,14 +28,16 @@ const TagWrapper = styled(Box)(({ theme }) => ({
   position: "sticky",
   background: "white",
   borderBottom: "1px solid #f0f0f0",
-  [theme.breakpoints.up("md")]: { top: "68.5px" },
+  [theme.breakpoints.up("md")]: { top: "64.5px" },
 }));
 
-const TextWrapper = styled(Box)(() => ({
+const TextWrapper = styled(Box)(({ theme }) => ({
   width: "100%",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
+  [theme.breakpoints.up("md")]: { marginTop: 0 },
+  marginTop: -70,
 }));
 
 const MenuIconButton = styled(IconButton)(({ theme }) => ({

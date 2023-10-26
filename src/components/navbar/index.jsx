@@ -44,11 +44,10 @@ const StyledShoppingCart = styled(ShoppingCartIcon)(() => ({
 const StyledContainer = styled(Container)(() => ({ padding: 0 }));
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
-  width: "94%",
+  maxWidth: "100%",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  [theme.breakpoints.up("md")]: { width: "98%" },
 }));
 
 const LogoWrapper = styled(Box)(() => ({
@@ -62,6 +61,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
     top: 13,
     right: -3,
+    width: "20px",
     padding: "0 4px",
     border: `2px solid ${theme.palette.background.paper}`,
   },
@@ -93,7 +93,7 @@ const NavBar = ({ cartItems }) => {
             <Box>
               <Link to={"/cart"}>
                 <IconButton
-                  size="large"
+                  size="small"
                   aria-label="account of current user"
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
@@ -102,6 +102,10 @@ const NavBar = ({ cartItems }) => {
                   <StyledBadge
                     badgeContent={totalCartQuantity}
                     color="secondary"
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
                   >
                     <StyledShoppingCart />
                   </StyledBadge>
