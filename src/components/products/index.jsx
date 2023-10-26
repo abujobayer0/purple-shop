@@ -17,7 +17,7 @@ const Products = ({ Products, loading }) => {
     return (
       <ProductsGrid container spacing={4}>
         {Products?.map((Product, index) => (
-          <Grid item key={index} xs={6} md={6} lg={6}>
+          <Grid item key={index} xs={6} md={12} lg={6}>
             <ProductCard Product={Product} />
           </Grid>
         ))}

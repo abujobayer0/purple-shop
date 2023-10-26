@@ -6,8 +6,10 @@ import ProductCard from "./productCard";
 import Products from "./products";
 import BackButton from "./backButton";
 import Loader from "./loader";
+import Footer from "./footer";
 export {
   Loader,
+  Footer,
   NavBar,
   BackButton,
   ProductCard,

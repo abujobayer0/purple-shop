@@ -21,7 +21,7 @@ const ProductCardContainer = styled(Card)(({ theme }) => ({
 const ProductCardSkeleton = () => {
   return (
     <Container sx={{ minHeight: "100vh", my: 4, display: "flex" }}>
-      <Grid container spacing={12}>
+      <Grid container spacing={{ xs: 4, md: 12 }}>
         <Grid item xs={6} md={12} lg={6}>
           <ProductCardContainer>
             <Skeleton variant="rectangular" width="100%" height={220} />

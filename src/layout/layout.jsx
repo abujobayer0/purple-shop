@@ -92,15 +92,13 @@ const Layout = () => {
             </Grid>
           </Hidden>
           <Grid item xs={12} md={9}>
-            <>
-              <Tags
-                active={tag}
-                openDrawer={openDrawer}
-                setTag={setTag}
-                tags={tags}
-              />
-              <Outlet />
-            </>
+            <Tags
+              active={tag}
+              openDrawer={openDrawer}
+              setTag={setTag}
+              tags={tags}
+            />
+            <Outlet />
           </Grid>
         </Grid>
       </Container>
