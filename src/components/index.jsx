@@ -5,7 +5,9 @@ import Categories from "./categories";
 import ProductCard from "./productCard";
 import Products from "./products";
 import BackButton from "./backButton";
+import Loader from "./loader";
 export {
+  Loader,
   NavBar,
   BackButton,
   ProductCard,

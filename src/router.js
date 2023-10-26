@@ -21,15 +21,16 @@ const router = createBrowserRouter([
         path: "/category/:categoryId",
         element: <CategoryProducts />,
       },
-      {
-        path: "/item/:itemId",
-        element: <ProductDetail />,
-      },
-      {
-        path: "/cart",
-        element: <Cart />,
-      },
     ],
   },
+  {
+    path: "/item/:itemId",
+    element: <ProductDetail />,
+  },
+  {
+    path: "/cart",
+    element: <Cart />,
+  },
 ]);
+
 export default router;

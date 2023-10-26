@@ -1,23 +1,48 @@
 import React from "react";
-import { Container, Typography, Chip, styled } from "@mui/material";
+import { Typography, Chip, styled, Box, IconButton } from "@mui/material";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Title = styled(Typography)(({ theme }) => ({
-  marginBottom: theme.spacing(3),
+  color: "white",
   fontWeight: 600,
+  marginBottom: theme.spacing(1),
   textTransform: "uppercase",
   background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
   "-webkit-background-clip": "text",
   "-webkit-text-fill-color": "transparent",
-  color: "white",
 }));
 
 const TagsChip = styled(Chip)(({ theme }) => ({
   padding: 1,
+  color: "#444",
   marginRight: 10,
   marginBottom: 10,
   fontStyle: "italic",
-  color: "#444",
+}));
+
+const TagWrapper = styled(Box)(({ theme }) => ({
+  zIndex: 99,
+  width: "100%",
+  top: "55.5px",
+  position: "sticky",
+  background: "white",
+  borderBottom: "1px solid #f0f0f0",
+  [theme.breakpoints.up("md")]: { top: "68.5px" },
+}));
+
+const TextWrapper = styled(Box)(() => ({
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+}));
+
+const MenuIconButton = styled(IconButton)(({ theme }) => ({
+  margin: 10,
+  display: "flex",
+  cursor: "pointer",
+  [theme.breakpoints.up("md")]: { display: "none" },
 }));
 
 const Tag = ({ label, onClick, isActive }) => (
@@ -34,10 +59,17 @@ const Tag = ({ label, onClick, isActive }) => (
   />
 );
 
-const Tags = ({ tags, setTag, active }) => {
+const Tags = ({ tags, setTag, active, openDrawer }) => {
   return (
-    <Container>
-      <Title variant="h4">Tags</Title>
+    <TagWrapper>
+      <TextWrapper>
+        <Title variant="h6" pt={4}>
+          Tags
+        </Title>
+        <MenuIconButton onClick={openDrawer}>
+          <MenuIcon sx={{ fontSize: 34 }} />
+        </MenuIconButton>
+      </TextWrapper>
       <Tag label="All" onClick={() => setTag("")} isActive={active === ""} />
       {tags?.map((tag, indx) => (
         <Tag
@@ -47,7 +79,7 @@ const Tags = ({ tags, setTag, active }) => {
           isActive={active === tag}
         />
       ))}
-    </Container>
+    </TagWrapper>
   );
 };
 

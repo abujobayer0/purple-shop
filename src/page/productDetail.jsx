@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { BackButton } from "../components";
+import { BackButton, NavBar } from "../components";
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import { useParams } from "react-router-dom";
@@ -33,9 +33,7 @@ const PurplePaper = styled(Paper)(({ theme }) => ({
 const Title = styled(Typography)(({ theme }) => ({
   fontWeight: "bold",
   fontSize: "2.8rem",
-  [theme.breakpoints.down("md")]: {
-    fontSize: "1.8rem",
-  },
+  [theme.breakpoints.down("md")]: { fontSize: "1.8rem" },
   color: "#333",
 }));
 
@@ -65,9 +63,7 @@ const QuantityInfo = styled(Typography)(({ theme }) => ({
   flexDirection: "column",
   marginBottom: 5,
   width: "100%",
-  [theme.breakpoints.up("lg")]: {
-    width: "50%",
-  },
+  [theme.breakpoints.up("lg")]: { width: "50%" },
 }));
 
 const CategoriesChip = styled(Chip)(({ theme }) => ({
@@ -121,9 +117,7 @@ const QuantityButton = styled(Button)(({ theme }) => ({
   background: "linear-gradient(to bottom, #C6A4E6, #BAA3E6)",
   color: "#fff",
   transition: "background 0.5s ease-in-out",
-  "&:hover": {
-    background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
-  },
+  "&:hover": { background: "linear-gradient(to bottom, #8E24AA, #673AB7)" },
   borderRadius: "0px 0px 0px 0px",
 }));
 
@@ -146,9 +140,7 @@ const TextWrapper = styled(Box)(({ theme }) => ({
   alignItems: "start",
   border: "1px solid lightgray",
   padding: 50,
-  [theme.breakpoints.down("md")]: {
-    padding: 30,
-  },
+  [theme.breakpoints.down("md")]: { padding: 30 },
   borderRadius: 5,
   marginBottom: 50,
 }));
@@ -192,112 +184,105 @@ const ProductDetail = () => {
   }, []);
 
   return (
-    <Container maxWidth="lg">
-      <BackButton />
+    <React.Fragment>
+      <NavBar />
+      <Container maxWidth="lg">
+        <BackButton />
 
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
-          <PurplePaper>
-            <img
-              src={pictures[0]}
-              alt={title}
-              style={{ width: "100%", borderRadius: 0 }}
-            />
-          </PurplePaper>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextWrapper>
-            <Title variant="h4" gutterBottom>
-              {title}
-            </Title>{" "}
-            <Price variant="h6" color="textSecondary">
-              Price: €{price}
-            </Price>
-            <Description variant="subtitle1" gutterBottom>
-              {description}
-            </Description>
-            <Box
-              display={"flex"}
-              justifyContent={"start"}
-              flexWrap={"wrap"}
-              gap={{ xs: 1, md: 0, lg: 5 }}
-              alignItems={"center"}
-              width={1}
-            >
-              <Info
-                variant="body2"
-                justifyContent={"center"}
-                color="textSecondary"
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6}>
+            <PurplePaper>
+              <img
+                src={pictures[0]}
+                alt={title}
+                style={{ width: "100%", borderRadius: 0 }}
+              />
+            </PurplePaper>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextWrapper>
+              <Title variant="h4" gutterBottom>
+                {title}
+              </Title>
+              <Price variant="h6">Price: €{price}</Price>
+              <Description variant="subtitle1" gutterBottom>
+                {description}
+              </Description>
+              <Box
+                display={"flex"}
+                justifyContent={"start"}
+                flexWrap={"wrap"}
+                gap={{ xs: 1, md: 0, lg: 5 }}
+                alignItems={"center"}
+                width={1}
               >
-                <Typography>Categories: </Typography>
-                <Typography>
-                  {product.categories.map((category) => (
-                    <CategoriesChip
-                      key={category}
-                      label={category}
-                      size="small"
-                    />
-                  ))}
-                </Typography>
-              </Info>
+                <Info justifyContent={"center"}>
+                  <Typography>Categories: </Typography>
+                  <Typography>
+                    {product.categories.map((category) => (
+                      <CategoriesChip
+                        key={category}
+                        label={category}
+                        size="small"
+                      />
+                    ))}
+                  </Typography>
+                </Info>
 
-              <Info variant="body2" color="textSecondary">
-                <Typography>Collections: </Typography>
+                <Info>
+                  <Typography>Collections: </Typography>
+                  <Typography>
+                    {product.collections.map((collection) => (
+                      <CollectionChip
+                        key={collection}
+                        label={collection}
+                        size="small"
+                      />
+                    ))}
+                  </Typography>
+                </Info>
 
-                <Typography>
-                  {product.collections.map((collection) => (
-                    <CollectionChip
-                      key={collection}
-                      label={collection}
-                      size="small"
-                    />
-                  ))}
-                </Typography>
-              </Info>
-
-              <Info variant="body2" color="textSecondary">
-                <Typography>Tags: </Typography>
-
-                <Typography>
-                  {product.tags.map((tag) => (
-                    <TagsChip
-                      key={tag}
-                      label={tag}
-                      size="small"
-                      icon={<LocalOfferIcon fontSize="small" color="white" />}
-                    />
-                  ))}
-                </Typography>
-              </Info>
-            </Box>
-            <QuantityInfo variant="body2" color="textSecondary">
-              Quantity:{" "}
-              <QuantityContainer>
-                <QuantityControl>
-                  <QuantityButton onClick={handleDecreaseQuantity}>
-                    <RemoveIcon />
-                  </QuantityButton>
-
-                  <QuantityNumber>{quantity}</QuantityNumber>
-
-                  <QuantityButton onClick={handleIncreaseQuantity}>
-                    <AddIcon />
-                  </QuantityButton>
-                </QuantityControl>
-              </QuantityContainer>
-            </QuantityInfo>
-            <button className="cart-button" onClick={handleCartClick}>
-              <span className="add-to-cart">Add to cart</span>
-              <span className="added">
-                <FileDownloadDoneIcon />
-              </span>
-              <ShoppingCart className="fas fa-shopping-cart" />
-              <ShoppingBasketIcon className="fas fa-box" />
-            </button>
-          </TextWrapper>
+                <Info>
+                  <Typography>Tags: </Typography>
+                  <Typography>
+                    {product.tags.map((tag) => (
+                      <TagsChip
+                        key={tag}
+                        label={tag}
+                        size="small"
+                        icon={<LocalOfferIcon fontSize="small" color="white" />}
+                      />
+                    ))}
+                  </Typography>
+                </Info>
+              </Box>
+              <QuantityInfo>
+                Quantity:
+                <QuantityContainer>
+                  <QuantityControl>
+                    <QuantityButton onClick={handleDecreaseQuantity}>
+                      <RemoveIcon />
+                    </QuantityButton>
+                    <QuantityNumber>{quantity}</QuantityNumber>
+                    <QuantityButton onClick={handleIncreaseQuantity}>
+                      <AddIcon />
+                    </QuantityButton>
+                  </QuantityControl>
+                </QuantityContainer>
+              </QuantityInfo>
+              <button className="cart-button" onClick={handleCartClick}>
+                <span className="add-to-cart">Add to cart</span>
+                <span className="added">
+                  <FileDownloadDoneIcon />
+                </span>
+                <ShoppingCart className="fas fa-shopping-cart" />
+                <ShoppingBasketIcon className="fas fa-box" />
+              </button>
+            </TextWrapper>
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </React.Fragment>
   );
 };
 

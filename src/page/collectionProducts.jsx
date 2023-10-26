@@ -1,9 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import useFetchProducts from "../hooks/useFetchProducts";
-import { BackButton, Products } from "../components";
+import { Loader, Products } from "../components";
 import { Container } from "@mui/material";
-import Loader from "../components/products/loader";
 
 const CollectionProducts = () => {
   const { collectionId } = useParams();
@@ -14,15 +13,18 @@ const CollectionProducts = () => {
   );
 
   if (loading) {
-    return <Loader />;
+    return (
+      <Container>
+        <Loader />
+      </Container>
+    );
+  } else {
+    return (
+      <Container sx={{ minHeight: "100vh" }}>
+        <Products Products={showProducts} />
+      </Container>
+    );
   }
-
-  return (
-    <Container>
-      <BackButton />
-      <Products Products={showProducts} />
-    </Container>
-  );
 };
 
 export default CollectionProducts;

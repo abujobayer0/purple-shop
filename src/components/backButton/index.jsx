@@ -3,8 +3,8 @@ import { Button, Box, styled } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const Wrapper = styled(Box)(() => ({
-  margin: "25px 0",
   display: "flex",
+  margin: "25px 0",
   alignItems: "center",
 }));
 
@@ -13,9 +13,7 @@ const BackBtn = styled(Button)(() => ({
   color: "white",
   height: "40px",
   border: "none",
-  "&:hover": {
-    border: "none",
-  },
+  "&:hover": { border: "none" },
 }));
 
 const BackButton = () => {
