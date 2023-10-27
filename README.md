@@ -7,17 +7,14 @@ Follow these steps to set up the project locally:
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/your-username/repository-name.git
-   cd repository-name
+   git clone https://github.com/zubayermunna/purple-shop
+   ```
+
+   ```bash
+   cd purple-shop
    ```
 
 ## Install Dependencies:
-
-### Using npm:
-
-```bash
-npm install
-```
 
 ### Using yarn:
 
@@ -26,12 +23,6 @@ yarn install
 ```
 
 ## Start the Development Server:
-
-### Using npm:
-
-```bash
-npm start
-```
 
 ### Using yarn:
 

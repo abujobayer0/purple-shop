@@ -16,6 +16,7 @@ const categoriesReducer = (state = initialState, action) => {
         categories: action.payload,
         error: null,
       };
+
     case FETCH_CATEGORIES_FAILURE:
       return {
         ...state,

@@ -13,7 +13,7 @@ const AddressForm = () => {
         Shipping address
       </Typography>
 
-      <Alert severity="warning">Optional Demo Fields !</Alert>
+      <Alert severity="warning">Optional Fields Demo !</Alert>
 
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>

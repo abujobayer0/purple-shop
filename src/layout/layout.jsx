@@ -46,9 +46,10 @@ const Layout = () => {
   }
 
   const url = queryUrl || "/items";
-  const categories = useFetchCategories();
   const tags = useFetchTags();
+  const categories = useFetchCategories();
   const collections = useFetchCollection();
+
   useFetchProducts(url);
 
   const openDrawer = () => {

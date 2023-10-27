@@ -17,6 +17,7 @@ const productsReducer = (state = initialState, action) => {
         ...state,
         loading: true,
       };
+
     case FETCH_PRODUCTS_SUCCESS:
       return {
         ...state,
@@ -24,12 +25,14 @@ const productsReducer = (state = initialState, action) => {
         products: action.payload,
         error: null,
       };
+
     case FETCH_PRODUCTS_FAILURE:
       return {
         ...state,
         loading: false,
         error: action.error,
       };
+
     default:
       return state;
   }

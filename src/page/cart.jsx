@@ -323,7 +323,7 @@ const Cart = ({ cartItems }) => {
               <Grid container gap={20} justify="space-between">
                 <ItemText variant="overline">Items {cartItems.length}</ItemText>
                 <Typography variant="overline">
-                  €{totalWithoutDiscount}
+                  €{totalWithoutDiscount.toFixed(2)}
                 </Typography>
               </Grid>
 
@@ -368,16 +368,19 @@ const Cart = ({ cartItems }) => {
                   €{totalWithoutDiscount.toFixed(2)}
                 </Typography>
               </CostWrappper>
+
               <CostWrappper container gap={20}>
                 <Typography variant="overline">Discount</Typography>
                 <Typography variant="overline">{discount.discount}%</Typography>
               </CostWrappper>
+
               <CostWrappper container gap={20}>
                 <Typography variant="overline">Total </Typography>
                 <Typography variant="overline">
                   €{discountedTotal.toFixed(2)}
                 </Typography>
               </CostWrappper>
+
               {cartItems.length >= 1 ? (
                 <CheckoutButton
                   onClick={handleCheckoutNavigate}

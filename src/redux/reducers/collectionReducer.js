@@ -16,6 +16,7 @@ const collectionReducer = (state = initialState, action) => {
         collection: action.payload,
         error: null,
       };
+
     case FETCH_COLLECTION_FAILURE:
       return {
         ...state,

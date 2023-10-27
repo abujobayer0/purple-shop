@@ -30,6 +30,7 @@ const ProductCardSkeleton = () => {
             <Skeleton variant="text" height={70} width="80%" />
           </ProductCardContainer>
         </Grid>
+
         <Grid item xs={6} md={12} lg={6}>
           <ProductCardContainer>
             <Skeleton variant="rectangular" width="100%" height={220} />
@@ -38,6 +39,7 @@ const ProductCardSkeleton = () => {
             <Skeleton variant="text" height={70} width="80%" />
           </ProductCardContainer>
         </Grid>
+
         <Grid item xs={6} md={12} lg={6}>
           <ProductCardContainer>
             <Skeleton variant="rectangular" width="100%" height={220} />
@@ -46,6 +48,7 @@ const ProductCardSkeleton = () => {
             <Skeleton variant="text" height={70} width="80%" />
           </ProductCardContainer>
         </Grid>
+
         <Grid item xs={6} md={12} lg={6}>
           <ProductCardContainer>
             <Skeleton variant="rectangular" width="100%" height={220} />

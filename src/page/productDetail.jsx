@@ -256,6 +256,7 @@ const ProductDetail = () => {
                   </Typography>
                 </Info>
               </Box>
+
               <QuantityInfo>
                 Quantity:
                 <QuantityContainer>
@@ -270,6 +271,7 @@ const ProductDetail = () => {
                   </QuantityControl>
                 </QuantityContainer>
               </QuantityInfo>
+
               <button className="cart-button" onClick={handleCartClick}>
                 <span className="add-to-cart">Add to cart</span>
                 <span className="added">
