@@ -6,16 +6,18 @@ import MenuIcon from "@mui/icons-material/Menu";
 const Title = styled(Typography)(({ theme }) => ({
   color: "white",
   fontWeight: 600,
-  marginBottom: theme.spacing(1),
+  [theme.breakpoints.up("md")]: { paddingTop: 30 },
+  paddingTop: 18,
+  marginBottom: theme.spacing(2),
   textTransform: "uppercase",
-  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  background: "linear-gradient(to bottom, #bd68d4, #8959db)",
   "-webkit-background-clip": "text",
   "-webkit-text-fill-color": "transparent",
 }));
 
 const TagsChip = styled(Chip)(({ theme }) => ({
   padding: 1,
-  color: "#444",
+  color: "#999",
   marginRight: 10,
   marginBottom: 10,
   fontStyle: "italic",
@@ -26,8 +28,9 @@ const TagWrapper = styled(Box)(({ theme }) => ({
   width: "100%",
   top: "55.5px",
   position: "sticky",
-  background: "white",
+  background: "rgba(255, 255, 255, 0.9)",
   borderBottom: "1px solid #f0f0f0",
+  backdropFilter: "blur(10px)",
   [theme.breakpoints.up("md")]: { top: "64.5px" },
 }));
 
@@ -53,7 +56,7 @@ const Tag = ({ label, onClick, isActive }) => (
     size="small"
     onClick={onClick}
     sx={{
-      background: isActive && "linear-gradient(to bottom, #8E24AA, #673AB7)",
+      background: isActive && "linear-gradient(to bottom, #bd68d4, #8959db)",
       color: isActive && "white",
     }}
     variant={isActive ? "contained" : "outlined"}

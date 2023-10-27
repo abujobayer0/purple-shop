@@ -47,7 +47,7 @@ const CheckoutButton = styled(Button)(() => ({
   color: "white",
   fontWeight: "bold",
   textTransform: "uppercase",
-  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  background: "linear-gradient(to bottom, #bd68d4, #8959db)",
 }));
 
 const ApplyButton = styled(Button)(() => ({
@@ -62,7 +62,7 @@ const QuantityButtonGroup = styled(ButtonGroup)(() => ({
   "& button": {
     color: "white",
     borderColor: "lightgray",
-    background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+    background: "linear-gradient(to bottom, #bd68d4, #8959db)",
   },
   "& button:first-of-type": {
     borderTopRightRadius: 0,
@@ -104,7 +104,7 @@ const IntroBox = styled(Box)(() => ({
   borderRadius: 5,
   marginBottom: 10,
   padding: "10px 25px",
-  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  background: "linear-gradient(to bottom, #bd68d4, #8959db)",
 }));
 
 const PromoFieldWrapper = styled(Box)(() => ({ padding: "20px 0" }));

@@ -1,8 +1,7 @@
 import React from "react";
-import { Container, Typography, styled, Box, IconButton } from "@mui/material";
+import { Container, Typography, styled, Box, Button } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 const Title = styled(Typography)(({ theme }) => ({
   color: "white",
@@ -17,7 +16,7 @@ const Title = styled(Typography)(({ theme }) => ({
 const IntroBox = styled(Box)(({ theme }) => ({
   color: "white",
   borderRadius: 5,
-  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  background: "linear-gradient(to bottom, #bd68d4, #8959db)",
   "-webkit-background-clip": "text",
   "-webkit-text-fill-color": "transparent",
 }));
@@ -59,6 +58,14 @@ const StyledContainer = styled(Container)(({ theme }) => ({
   [theme.breakpoints.up("md")]: { paddingRight: 18 },
 }));
 
+const ResetButton = styled(Button)(() => ({
+  background: "linear-gradient(to bottom, #bd68d4, #8959db)",
+  "-webkit-background-clip": "text",
+  "-webkit-text-fill-color": "transparent",
+  color: "white",
+  border: "1px solid #f0f0f0",
+}));
+
 const Categories = ({ categories, setTag, closeDrawer }) => {
   const navigate = useNavigate();
 
@@ -78,9 +85,7 @@ const Categories = ({ categories, setTag, closeDrawer }) => {
       <IntroBox>
         <Title variant="h6">
           Categories
-          <IconButton onClick={handleReset}>
-            <RestartAltIcon />
-          </IconButton>
+          <ResetButton onClick={handleReset}>CLEAR</ResetButton>
         </Title>
       </IntroBox>
       <StyledBox>

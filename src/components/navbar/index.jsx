@@ -29,7 +29,7 @@ const StyledTypography = styled(Typography)(() => ({
   fontWeight: 800,
   alignItems: "center",
   fontSize: { xs: 15, md: 20 },
-  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  background: "linear-gradient(to bottom, #bd68d4, #8959db)",
   "-webkit-background-clip": "text",
   "-webkit-text-fill-color": "transparent",
 }));
@@ -38,7 +38,7 @@ const StyledShoppingCart = styled(ShoppingCartIcon)(() => ({
   padding: 10,
   color: "white",
   borderRadius: 5,
-  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  background: "linear-gradient(to bottom, #bd68d4, #8959db)",
 }));
 
 const StyledContainer = styled(Container)(() => ({ padding: 0 }));

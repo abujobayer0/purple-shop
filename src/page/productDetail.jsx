@@ -21,7 +21,7 @@ import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import FileDownloadDoneIcon from "@mui/icons-material/FileDownloadDone";
 
 const PurplePaper = styled(Paper)(({ theme }) => ({
-  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  background: "linear-gradient(to bottom, #bd68d4, #8959db)",
   color: "white",
   border: "1px solid lightgray",
   textAlign: "center",
@@ -67,21 +67,21 @@ const QuantityInfo = styled(Typography)(({ theme }) => ({
 }));
 
 const CategoriesChip = styled(Chip)(({ theme }) => ({
-  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  background: "linear-gradient(to bottom, #bd68d4, #8959db)",
   color: "white",
   marginRight: 5,
   padding: 1,
 }));
 
 const CollectionChip = styled(Chip)(({ theme }) => ({
-  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  background: "linear-gradient(to bottom, #bd68d4, #8959db)",
   color: "white",
   padding: 1,
   marginRight: 5,
 }));
 
 const TagsChip = styled(Chip)(({ theme }) => ({
-  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  background: "linear-gradient(to bottom, #bd68d4, #8959db)",
   padding: 1,
   marginRight: 5,
   color: "white",
@@ -117,7 +117,7 @@ const QuantityButton = styled(Button)(({ theme }) => ({
   background: "linear-gradient(to bottom, #C6A4E6, #BAA3E6)",
   color: "#fff",
   transition: "background 0.5s ease-in-out",
-  "&:hover": { background: "linear-gradient(to bottom, #8E24AA, #673AB7)" },
+  "&:hover": { background: "linear-gradient(to bottom, #bd68d4, #8959db)" },
   borderRadius: "0px 0px 0px 0px",
 }));
 

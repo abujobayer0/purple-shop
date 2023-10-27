@@ -9,7 +9,7 @@ const Wrapper = styled(Box)(() => ({
 }));
 
 const BackBtn = styled(Button)(() => ({
-  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  background: "linear-gradient(to bottom, #bd68d4, #8959db)",
   color: "white",
   height: "40px",
   border: "none",

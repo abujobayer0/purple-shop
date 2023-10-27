@@ -59,7 +59,7 @@ const QuantityButton = styled(Box)(({ theme }) => ({
   borderRadius: "0px 0px 0px 0px",
   transition: "background 0.5s ease-in-out",
   background: "linear-gradient(to bottom, #C6A4E6, #BAA3E6)",
-  "&:hover": { background: "linear-gradient(to bottom, #8E24AA, #673AB7)" },
+  "&:hover": { background: "linear-gradient(to bottom, #bd68d4, #8959db)" },
 }));
 
 const QuantityNumber = styled(Typography)(({ theme }) => ({

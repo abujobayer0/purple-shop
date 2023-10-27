@@ -30,7 +30,7 @@ const NoDataTitle = styled(Typography)(() => ({
   fontSize: 16,
   marginLeft: 5,
   fontWeight: 600,
-  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  background: "linear-gradient(to bottom, #bd68d4, #8959db)",
   "-webkit-background-clip": "text",
   "-webkit-text-fill-color": "transparent",
 }));

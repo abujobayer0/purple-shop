@@ -13,7 +13,7 @@ const IntroBox = styled(Box)(({ theme }) => ({
   color: "white",
   borderRadius: 5,
   marginBottom: 10,
-  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
+  background: "linear-gradient(to bottom, #bd68d4, #8959db)",
   "-webkit-background-clip": "text",
   "-webkit-text-fill-color": "transparent",
 }));
