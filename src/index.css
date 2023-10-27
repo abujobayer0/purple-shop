@@ -182,3 +182,33 @@ code {
     opacity: 1;
   }
 }
+
+.active {
+  color: white;
+  background-image: linear-gradient(to bottom, #8e24aa, #673ab7);
+  border-radius: 100px 10px 100px 10px;
+}
+
+.active:hover {
+  background: linear-gradient(to bottom, #8e24aa, #673ab7);
+  color: white;
+}
+
+.active:focus {
+  color: white;
+  background-image: linear-gradient(to bottom, #8e24aa, #673ab7);
+  text-decoration: none;
+}
+
+a:hover {
+  color: purple;
+}
+
+a:focus {
+  color: purple;
+  text-decoration: none;
+  outline: none;
+}
+a {
+  text-decoration: none;
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Container, Typography, styled, Box } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
@@ -28,18 +28,13 @@ const CollectionWrapper = styled(Box)(({ theme }) => ({
   transition: "background 0.3s",
   border: "1px solid lightgray",
   justifyContent: "space-between",
-  "&:hover": { background: "#f0f0f0", borderColor: "lightgray" },
 }));
 
 const Collection = styled(Typography)(({ theme }) => ({
   fontSize: 12,
-  color: "white",
   fontWeight: 600,
   padding: "0 25px",
   textTransform: "uppercase",
-  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
-  "-webkit-background-clip": "text",
-  "-webkit-text-fill-color": "transparent",
 }));
 
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -61,10 +56,7 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 }));
 
 const Collections = ({ collections, setTag, closeDrawer }) => {
-  const navigate = useNavigate();
-
-  const handleNavigate = (collection) => {
-    navigate(`/collection/${collection}`);
+  const handleRoute = () => {
     setTag("");
     closeDrawer();
   };
@@ -76,13 +68,16 @@ const Collections = ({ collections, setTag, closeDrawer }) => {
       </IntroBox>
       <StyledBox>
         {collections?.map((collection, indx) => (
-          <CollectionWrapper
+          <NavLink
             key={indx}
-            onClick={() => handleNavigate(collection)}
+            onClick={handleRoute}
+            to={`/collection/${collection}`}
           >
-            <Collection variant="h6">{collection}</Collection>
-            <Arrow />
-          </CollectionWrapper>
+            <CollectionWrapper>
+              <Collection variant="h6">{collection}</Collection>
+              <Arrow />
+            </CollectionWrapper>
+          </NavLink>
         ))}
       </StyledBox>
     </StyledContainer>

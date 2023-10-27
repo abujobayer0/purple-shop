@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Typography, styled, Box, IconButton } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
@@ -36,13 +36,9 @@ const CategoryWrapper = styled(Box)(({ theme }) => ({
 
 const Category = styled(Typography)(({ theme }) => ({
   fontSize: 12,
-  color: "white",
   fontWeight: 600,
   padding: "0 25px",
   textTransform: "uppercase",
-  background: "linear-gradient(to bottom, #8E24AA, #673AB7)",
-  "-webkit-background-clip": "text",
-  "-webkit-text-fill-color": "transparent",
 }));
 
 const StyledBox = styled(Box)(() => ({
@@ -66,8 +62,7 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 const Categories = ({ categories, setTag, closeDrawer }) => {
   const navigate = useNavigate();
 
-  const handleNavigate = (category) => {
-    navigate(`/category/${category}`);
+  const handleRoute = () => {
     setTag("");
     closeDrawer();
   };
@@ -90,10 +85,16 @@ const Categories = ({ categories, setTag, closeDrawer }) => {
       </IntroBox>
       <StyledBox>
         {categories?.map((category, indx) => (
-          <CategoryWrapper key={indx} onClick={() => handleNavigate(category)}>
-            <Category variant="h6">{category}</Category>
-            <Arrow />
-          </CategoryWrapper>
+          <NavLink
+            key={indx}
+            onClick={handleRoute}
+            to={`/category/${category}`}
+          >
+            <CategoryWrapper>
+              <Category variant="h6">{category}</Category>
+              <Arrow />
+            </CategoryWrapper>
+          </NavLink>
         ))}
       </StyledBox>
     </StyledContainer>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Typography, Box, Button, styled } from "@mui/material";
+import { Card, Typography, Box, styled } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useAddToCart } from "../../hooks/useCart";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
@@ -25,17 +25,19 @@ const ProductCardContainer = styled(Card)(({ theme }) => ({
 }));
 
 const QuantityContainer = styled(Box)(({ theme }) => ({
-  width: "50%",
+  width: "100%",
   gap: "0.44rem",
   display: "flex",
-  alignItems: "center",
+  alignItems: "start",
   flexDirection: "column",
   [theme.breakpoints.down("md")]: { width: "100%" },
 }));
 
 const QuantityControl = styled(Box)(({ theme }) => ({
-  paddding: 5,
   width: "100%",
+  [theme.breakpoints.up("md")]: {
+    width: "40%",
+  },
   gap: "1.25rem",
   marginTop: 10,
   height: "40px",
@@ -49,14 +51,15 @@ const QuantityControl = styled(Box)(({ theme }) => ({
   border: "1px solid lightgray",
 }));
 
-const QuantityButton = styled(Button)(({ theme }) => ({
+const QuantityButton = styled(Box)(({ theme }) => ({
+  width: "100%",
   color: "#fff",
   cursor: " pointer",
   padding: "0.50rem",
-  background: "linear-gradient(to bottom, #C6A4E6, #BAA3E6)",
-  transition: "background 0.5s ease-in-out",
-  "&:hover": { background: "linear-gradient(to bottom, #8E24AA, #673AB7)" },
   borderRadius: "0px 0px 0px 0px",
+  transition: "background 0.5s ease-in-out",
+  background: "linear-gradient(to bottom, #C6A4E6, #BAA3E6)",
+  "&:hover": { background: "linear-gradient(to bottom, #8E24AA, #673AB7)" },
 }));
 
 const QuantityNumber = styled(Typography)(({ theme }) => ({
