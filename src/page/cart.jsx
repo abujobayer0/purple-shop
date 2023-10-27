@@ -15,13 +15,16 @@ import {
   TextField,
   Box,
   styled,
+  Alert,
 } from "@mui/material";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { BackButton, NavBar } from "../components";
 import { useRemoveFromCart, useUpdateCartItemQuantity } from "../hooks/useCart";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { setDiscount } from "../redux/actions/discountAction";
+import useDiscount from "../hooks/useCartCalculations";
 
 const CartsWrapper = styled(Paper)(() => ({
   boxShadow: "none",
@@ -55,10 +58,13 @@ const CheckoutButton = styled(Button)(() => ({
 }));
 
 const ApplyButton = styled(Button)(() => ({
-  color: "black",
   width: "100%",
   fontWeight: "bold",
-  background: "lightgray",
+  background: "#86A789",
+  color: "white",
+  "&:hover": {
+    background: "#B2C8BA",
+  },
   textTransform: "uppercase",
 }));
 
@@ -145,9 +151,14 @@ const QuantityNumber = styled(Typography)(({ theme }) => ({
 const ItemText = styled(Typography)(() => ({ textTransform: "uppercase" }));
 
 const Cart = ({ cartItems }) => {
-  const removeFromCart = useRemoveFromCart();
-  const updateCartItemQuantity = useUpdateCartItemQuantity();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const removeFromCart = useRemoveFromCart();
+  const [promoCode, setPromoCode] = React.useState("");
+  const updateCartItemQuantity = useUpdateCartItemQuantity();
+  const { discount } = useDiscount();
+
+  const PROMO_CODE = "jamie23";
 
   const handleIncreaseQuantity = ({ id, quantity }) => {
     const newQuantity = quantity + 1;
@@ -172,6 +183,23 @@ const Cart = ({ cartItems }) => {
   const handleCheckoutNavigate = () => {
     navigate("/checkout");
   };
+
+  const handleSetDiscount = () => {
+    dispatch(setDiscount(10));
+    setPromoCode("");
+  };
+
+  const totalWithoutDiscount = cartItems.reduce(
+    (total, product) =>
+      total + parseFloat(product.product.price) * product.quantity,
+    0
+  );
+
+  const discountedTotal =
+    discount && discount.discount
+      ? totalWithoutDiscount -
+        (totalWithoutDiscount * parseFloat(discount.discount)) / 100
+      : totalWithoutDiscount;
 
   return (
     <React.Fragment>
@@ -295,53 +323,74 @@ const Cart = ({ cartItems }) => {
               <Grid container gap={20} justify="space-between">
                 <ItemText variant="overline">Items {cartItems.length}</ItemText>
                 <Typography variant="overline">
-                  €
-                  {cartItems
-                    .reduce(
-                      (total, item) =>
-                        total + item.product.price * item.quantity,
-                      0
-                    )
-                    .toFixed(2)}
+                  €{totalWithoutDiscount}
                 </Typography>
               </Grid>
 
               <PromoFieldWrapper>
+                <Alert
+                  sx={{ marginBottom: 2 }}
+                  color="secondary"
+                  severity="success"
+                >
+                  USE "jamie23" FOR 10% OFF
+                </Alert>
                 <TextField
                   id="promo"
                   label="Promo Code"
+                  color="secondary"
                   variant="outlined"
                   fullWidth
+                  value={promoCode}
+                  onChange={(e) => setPromoCode(e.target.value)}
                 />
               </PromoFieldWrapper>
 
-              <ApplyButton variant="contained" disabled>
-                Apply
-              </ApplyButton>
+              {promoCode === PROMO_CODE ? (
+                <ApplyButton variant="contained" onClick={handleSetDiscount}>
+                  Apply
+                </ApplyButton>
+              ) : (
+                <ApplyButton
+                  variant="contained"
+                  disabled
+                  onClick={handleSetDiscount}
+                >
+                  Apply
+                </ApplyButton>
+              )}
 
               <hr style={{ marginTop: "20px" }} />
 
               <CostWrappper container gap={20}>
-                <Typography variant="overline">Total cost</Typography>
+                <Typography variant="overline">Sub Total </Typography>
                 <Typography variant="overline">
-                  €
-                  {cartItems
-                    .reduce(
-                      (total, item) =>
-                        total + item.product.price * item.quantity,
-                      0
-                    )
-                    .toFixed(2)}
+                  €{totalWithoutDiscount.toFixed(2)}
                 </Typography>
               </CostWrappper>
-
-              <CheckoutButton
-                onClick={handleCheckoutNavigate}
-                variant="contained"
-                color="primary"
-              >
-                Checkout
-              </CheckoutButton>
+              <CostWrappper container gap={20}>
+                <Typography variant="overline">Discount</Typography>
+                <Typography variant="overline">{discount.discount}%</Typography>
+              </CostWrappper>
+              <CostWrappper container gap={20}>
+                <Typography variant="overline">Total </Typography>
+                <Typography variant="overline">
+                  €{discountedTotal.toFixed(2)}
+                </Typography>
+              </CostWrappper>
+              {cartItems.length >= 1 ? (
+                <CheckoutButton
+                  onClick={handleCheckoutNavigate}
+                  variant="contained"
+                  color="primary"
+                >
+                  Checkout
+                </CheckoutButton>
+              ) : (
+                <CheckoutButton disabled variant="contained" color="primary">
+                  Checkout
+                </CheckoutButton>
+              )}
             </OrderSummeryWrapper>
           </Grid>
         </Grid>

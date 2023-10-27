@@ -5,9 +5,23 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 import { useSelector } from "react-redux";
+import useDiscount from "../../hooks/useCartCalculations";
 
 const Review = () => {
   const cartItems = useSelector((state) => state.cart.items);
+  const { discount } = useDiscount();
+
+  const totalWithoutDiscount = cartItems.reduce(
+    (total, product) =>
+      total + parseFloat(product.product.price) * product.quantity,
+    0
+  );
+
+  const discountedTotal =
+    discount && discount.discount
+      ? totalWithoutDiscount -
+        (totalWithoutDiscount * parseFloat(discount.discount)) / 100
+      : totalWithoutDiscount;
 
   return (
     <React.Fragment>
@@ -23,21 +37,28 @@ const Review = () => {
               secondary={product.product.description}
             />
             <Typography variant="body2">
-              {`$${(product.product.price * product.quantity).toFixed(2)}`}
+              {product.quantity} {" x "}€{" "}
+              {`${(product.product.price * product.quantity).toFixed(2)}`}
             </Typography>
           </ListItem>
         ))}
 
         <ListItem sx={{ py: 1, px: 0 }}>
+          <ListItemText primary="Sub Total" />
+          <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+            € {totalWithoutDiscount.toFixed(2)}
+          </Typography>
+        </ListItem>
+        <ListItem sx={{ py: 1, px: 0 }}>
+          <ListItemText primary="Discount" />
+          <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+            {discount.discount}%
+          </Typography>
+        </ListItem>
+        <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            {`$${cartItems
-              .reduce(
-                (total, product) =>
-                  total + product.product.price * product.quantity,
-                0
-              )
-              .toFixed(2)}`}
+            € {discountedTotal.toFixed(2)}
           </Typography>
         </ListItem>
       </List>
@@ -68,7 +89,7 @@ const Review = () => {
               <Typography gutterBottom>Card holder</Typography>
             </Grid>
             <Grid item xs={6}>
-              <Typography gutterBottom>James Gale</Typography>
+              <Typography gutterBottom>James Alexander Gale</Typography>
             </Grid>
             <Grid item xs={6}>
               <Typography gutterBottom>Card number</Typography>

@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import Alert from "@mui/material/Alert";
 
 const AddressForm = () => {
   return (
@@ -11,6 +12,7 @@ const AddressForm = () => {
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
+      <Alert severity="warning">Optional Demo Fields !</Alert>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField

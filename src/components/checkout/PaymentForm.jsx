@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import Alert from "@mui/material/Alert";
 
 export default function PaymentForm() {
   return (
@@ -11,6 +12,8 @@ export default function PaymentForm() {
       <Typography variant="h6" gutterBottom>
         Payment method
       </Typography>
+      <Alert severity="warning">Optional Demo Fields !!</Alert>
+
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <TextField

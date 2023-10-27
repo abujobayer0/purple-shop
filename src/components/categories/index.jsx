@@ -63,7 +63,9 @@ const ResetButton = styled(Button)(() => ({
   "-webkit-background-clip": "text",
   "-webkit-text-fill-color": "transparent",
   color: "white",
-  border: "1px solid #f0f0f0",
+  fontWeight: 800,
+  fontSize: 10,
+  border: "3px solid #bd68d4",
 }));
 
 const Categories = ({ categories, setTag, closeDrawer }) => {

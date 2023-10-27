@@ -22,6 +22,9 @@ import VerifiedIcon from "@mui/icons-material/Verified";
 import StepConnector, {
   stepConnectorClasses,
 } from "@mui/material/StepConnector";
+import { useDispatch } from "react-redux";
+import { setDiscount } from "../../redux/actions/discountAction";
+import { clearCart } from "../../redux/actions/cartAction";
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -163,9 +166,15 @@ const getStepContent = (step) => {
 
 export const Checkout = () => {
   const [activeStep, setActiveStep] = React.useState(0);
+  const dispatch = useDispatch();
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
+
+    if (activeStep === steps.length - 1) {
+      dispatch(setDiscount(0));
+      dispatch(clearCart());
+    }
   };
 
   const handleBack = () => {
