@@ -20,6 +20,8 @@ import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { BackButton, NavBar } from "../components";
 import { useRemoveFromCart, useUpdateCartItemQuantity } from "../hooks/useCart";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 const CartsWrapper = styled(Paper)(() => ({
   boxShadow: "none",
@@ -32,6 +34,8 @@ const OrderSummeryWrapper = styled(Paper)(() => ({
   padding: "20px",
   marginTop: "20px",
   position: "sticky",
+  boxShadow: "none",
+  border: "1px solid #f0f0f0",
 }));
 
 const RemoveButton = styled(Button)(() => ({
@@ -122,6 +126,22 @@ const ProductTitle = styled(Box)(({ theme }) => ({
   fontWeight: "bold",
 }));
 
+const QuantityNumber = styled(Typography)(({ theme }) => ({
+  minWidth: 50,
+  display: "flex",
+  background: "#f0f0f0",
+  height: "100%",
+  fontWeight: "bold",
+  color: "#38453ec9",
+  lineHeight: "77.5%",
+  fontSize: "1.25rem",
+  alignItems: "center",
+  textAlign: "center",
+  letterSpacing: "0.01rem",
+  textTransform: "uppercase",
+  justifyContent: "center",
+}));
+
 const ItemText = styled(Typography)(() => ({ textTransform: "uppercase" }));
 
 const Cart = ({ cartItems }) => {
@@ -147,6 +167,10 @@ const Cart = ({ cartItems }) => {
 
   const handleNavigate = (id) => {
     navigate(`/item/${id}`);
+  };
+
+  const handleCheckoutNavigate = () => {
+    navigate("/checkout");
   };
 
   return (
@@ -224,10 +248,10 @@ const Cart = ({ cartItems }) => {
                                   })
                                 }
                               >
-                                -
+                                <RemoveIcon />
                               </Button>
                               <Box>
-                                <span>{item.quantity}</span>
+                                <QuantityNumber>{item.quantity}</QuantityNumber>
                               </Box>
                               <Button
                                 onClick={() =>
@@ -237,20 +261,20 @@ const Cart = ({ cartItems }) => {
                                   })
                                 }
                               >
-                                +
+                                <AddIcon />
                               </Button>
                             </QuantityButtonGroup>
                           </CartTableCell>
 
                           <CartTableCell>
-                            €{parseInt(item.product.price).toFixed(2)}
+                            €{parseFloat(item.product.price).toFixed(2)}
                           </CartTableCell>
 
                           <CartTableCell>
                             €
                             {(
-                              parseInt(item.product.price) *
-                              parseInt(item.quantity)
+                              parseFloat(item.product.price) *
+                              parseFloat(item.quantity)
                             ).toFixed(2)}
                           </CartTableCell>
                         </TableRow>
@@ -262,7 +286,7 @@ const Cart = ({ cartItems }) => {
             </CartsWrapper>
           </Grid>
 
-          <Grid item xs={12} sm={12} md={7} lg={4}>
+          <Grid item xs={12} sm={12} mb={10} md={7} lg={4}>
             <OrderSummeryWrapper>
               <Typography variant="h5" gutterBottom>
                 Order Summary
@@ -311,7 +335,11 @@ const Cart = ({ cartItems }) => {
                 </Typography>
               </CostWrappper>
 
-              <CheckoutButton variant="contained" color="primary">
+              <CheckoutButton
+                onClick={handleCheckoutNavigate}
+                variant="contained"
+                color="primary"
+              >
                 Checkout
               </CheckoutButton>
             </OrderSummeryWrapper>

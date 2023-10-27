@@ -36,6 +36,7 @@ const StyledTypography = styled(Typography)(() => ({
 
 const StyledShoppingCart = styled(ShoppingCartIcon)(() => ({
   padding: 10,
+  cursor: "pointer !important",
   color: "white",
   borderRadius: 5,
   background: "linear-gradient(to bottom, #bd68d4, #8959db)",
@@ -63,6 +64,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     right: -3,
     width: "20px",
     padding: "0 4px",
+    cursor: "pointer",
     border: `2px solid ${theme.palette.background.paper}`,
   },
 }));
