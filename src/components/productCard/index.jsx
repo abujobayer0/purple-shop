@@ -141,6 +141,7 @@ const ProductCard = ({ Product }) => {
   const handleCartClick = (e) => {
     const button = e.currentTarget;
     button.classList.add("clicked");
+
     setTimeout(() => {
       handleAddToCart();
       button.classList.remove("clicked");

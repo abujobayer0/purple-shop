@@ -17,15 +17,17 @@ import { Categories, Collections, Tags, NavBar } from "../components";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const Sidebar = styled(Box)(({ theme }) => ({
-  top: "100px",
+  top: "65px",
   zIndex: 100,
   width: "100%",
-  borderRadius: 5,
+  borderRadius: "0px 0px 5px 5px",
   padding: "10px",
   overflowY: "auto",
   position: "sticky",
   [theme.breakpoints.down("md")]: { top: "20px" },
-  border: "1px solid #f0f0f0",
+  borderLeft: "1px solid #f0f0f0",
+  borderRight: "1px solid #f0f0f0",
+  borderBottom: "1px solid #f0f0f0",
 }));
 
 const DrawerSidebar = styled(Drawer)(({ theme }) => ({

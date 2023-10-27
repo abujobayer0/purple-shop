@@ -209,6 +209,59 @@ a:focus {
   text-decoration: none;
   outline: none;
 }
+a:active {
+  color: purple;
+  text-decoration: none;
+  outline: none;
+}
 a {
   text-decoration: none;
+}
+
+.cart-animation,
+.cart-active {
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s;
+  border: none;
+  font-family: inherit;
+  background: transparent;
+}
+
+.cart-animation:hover,
+.cart-active:hover {
+  transform: translateY(0px);
+}
+
+.cart-animation::after,
+.cart-active::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.5s;
+}
+
+.cart-active::after {
+  animation: hoverEffect 0.4s linear;
+  z-index: 1;
+}
+
+@keyframes hoverEffect {
+  0% {
+    transform: scaleX(0.5) scaleY(0.5);
+    opacity: 1;
+    background: linear-gradient(to bottom, #8e24aa, #673ab7);
+  }
+  100% {
+    background: linear-gradient(to bottom, #8e24aa, #673ab7);
+    transform: scaleX(1.2) scaleY(1.6);
+    opacity: 0;
+  }
 }

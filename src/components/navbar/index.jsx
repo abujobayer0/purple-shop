@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import { Badge, Container, styled } from "@mui/material";
@@ -68,16 +68,33 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 const NavBar = ({ cartItems }) => {
-  const totalCartQuantity = cartItems.reduce(
-    (total, cartItem) => total + cartItem.quantity,
-    0
-  );
-
   const navigate = useNavigate();
+  const prevCartQuantityRef = useRef();
+  const [cartAnimation, setAnimation] = React.useState(false);
+
+  const totalCartQuantity = useMemo(() => {
+    return cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
+  }, [cartItems]);
 
   const handleNavigate = () => {
     navigate("/");
   };
+
+  useEffect(() => {
+    if (prevCartQuantityRef.current < totalCartQuantity) {
+      setAnimation(true);
+
+      const timeout = setTimeout(() => {
+        setAnimation(false);
+      }, 400);
+
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+
+    prevCartQuantityRef.current = totalCartQuantity;
+  }, [totalCartQuantity]);
 
   return (
     <Wrapper>
@@ -92,23 +109,23 @@ const NavBar = ({ cartItems }) => {
 
             <Box>
               <Link to={"/cart"}>
-                <IconButton
-                  size="small"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  color="inherit"
-                >
-                  <StyledBadge
-                    badgeContent={totalCartQuantity}
-                    color="secondary"
-                    anchorOrigin={{
-                      vertical: "top",
-                      horizontal: "left",
-                    }}
+                <IconButton size="small" color="inherit">
+                  <button
+                    className={`cart-animation ${
+                      cartAnimation ? "cart-active" : ""
+                    } `}
                   >
-                    <StyledShoppingCart />
-                  </StyledBadge>
+                    <StyledBadge
+                      badgeContent={totalCartQuantity}
+                      color="secondary"
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "left",
+                      }}
+                    >
+                      <StyledShoppingCart />
+                    </StyledBadge>
+                  </button>
                 </IconButton>
               </Link>
             </Box>
