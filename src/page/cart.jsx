@@ -148,6 +148,11 @@ const QuantityNumber = styled(Typography)(({ theme }) => ({
   justifyContent: "center",
 }));
 
+const StyledTableCell = styled(TableCell)(() => ({
+  whiteSpace: "nowrap",
+  fontWeight: 600,
+}));
+
 const ItemText = styled(Typography)(() => ({ textTransform: "uppercase" }));
 
 const Cart = ({ cartItems }) => {
@@ -225,10 +230,10 @@ const Cart = ({ cartItems }) => {
                   <Table>
                     <TableHead>
                       <TableRow>
-                        <TableCell>Product</TableCell>
-                        <TableCell>Quantity</TableCell>
-                        <TableCell>Unit Price</TableCell>
-                        <TableCell>Total Price</TableCell>
+                        <StyledTableCell>Product</StyledTableCell>
+                        <StyledTableCell>Quantity</StyledTableCell>
+                        <StyledTableCell>Unit Price</StyledTableCell>
+                        <StyledTableCell>Total Price</StyledTableCell>
                       </TableRow>
                     </TableHead>
 
