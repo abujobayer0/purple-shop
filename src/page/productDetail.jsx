@@ -199,6 +199,7 @@ const ProductDetail = () => {
               />
             </PurplePaper>
           </Grid>
+
           <Grid item xs={12} md={6}>
             <TextWrapper>
               <Title variant="h4" gutterBottom>
@@ -208,6 +209,7 @@ const ProductDetail = () => {
               <Description variant="subtitle1" gutterBottom>
                 {description}
               </Description>
+
               <Box
                 display={"flex"}
                 justifyContent={"start"}
@@ -217,7 +219,7 @@ const ProductDetail = () => {
                 width={1}
               >
                 <Info justifyContent={"center"}>
-                  <Typography>Categories: </Typography>
+                  <Typography>Categories </Typography>
                   <Typography>
                     {product.categories.map((category) => (
                       <CategoriesChip
@@ -230,7 +232,7 @@ const ProductDetail = () => {
                 </Info>
 
                 <Info>
-                  <Typography>Collections: </Typography>
+                  <Typography>Collections </Typography>
                   <Typography>
                     {product.collections.map((collection) => (
                       <CollectionChip
@@ -243,7 +245,7 @@ const ProductDetail = () => {
                 </Info>
 
                 <Info>
-                  <Typography>Tags: </Typography>
+                  <Typography>Tags </Typography>
                   <Typography>
                     {product.tags.map((tag) => (
                       <TagsChip
@@ -258,7 +260,7 @@ const ProductDetail = () => {
               </Box>
 
               <QuantityInfo>
-                Quantity:
+                Quantity
                 <QuantityContainer>
                   <QuantityControl>
                     <QuantityButton onClick={handleDecreaseQuantity}>
