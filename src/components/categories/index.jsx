@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Typography, styled, Box, Button } from "@mui/material";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const Title = styled(Typography)(({ theme }) => ({
@@ -68,6 +68,9 @@ const ResetButton = styled(Button)(() => ({
 
 const Categories = ({ categories, setTag, closeDrawer }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isClearBtn = location.pathname;
 
   const handleRoute = () => {
     setTag("");
@@ -85,7 +88,9 @@ const Categories = ({ categories, setTag, closeDrawer }) => {
       <IntroBox>
         <Title variant="h6">
           Categories
-          <ResetButton onClick={handleReset}>CLEAR</ResetButton>
+          {isClearBtn !== "/" && (
+            <ResetButton onClick={handleReset}>CLEAR</ResetButton>
+          )}
         </Title>
       </IntroBox>
       <StyledBox>

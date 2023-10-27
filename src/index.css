@@ -219,6 +219,11 @@ a:active {
 }
 a {
   text-decoration: none;
+  color: purple;
+}
+
+a:visited {
+  color: none;
 }
 
 .cart-animation,
