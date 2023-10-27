@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Typography, styled, Box, Button } from "@mui/material";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { SidebarSkeleton } from "../loader";
 
 const Title = styled(Typography)(({ theme }) => ({
   color: "white",
@@ -95,6 +96,7 @@ const Categories = ({ categories, setTag, closeDrawer }) => {
           )}
         </Title>
       </IntroBox>
+
       <StyledBox>
         {categories?.map((category, indx) => (
           <NavLink
@@ -109,6 +111,8 @@ const Categories = ({ categories, setTag, closeDrawer }) => {
           </NavLink>
         ))}
       </StyledBox>
+
+      {categories.length <= 1 && <SidebarSkeleton />}
     </StyledContainer>
   );
 };

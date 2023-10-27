@@ -5,11 +5,10 @@ import Categories from "./categories";
 import ProductCard from "./productCard";
 import Products from "./products";
 import BackButton from "./backButton";
-import Loader from "./loader";
-import Footer from "./footer";
+import { SidebarSkeleton, ProductCardSkeleton } from "./loader.jsx";
 export {
-  Loader,
-  Footer,
+  SidebarSkeleton,
+  ProductCardSkeleton,
   NavBar,
   BackButton,
   ProductCard,

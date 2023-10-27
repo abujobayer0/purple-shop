@@ -30,16 +30,19 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
     top: 22,
   },
+
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       backgroundImage: "linear-gradient(to bottom, #bd68d4, #8959db)",
     },
   },
+
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       backgroundImage: "linear-gradient(to bottom, #bd68d4, #8959db)",
     },
   },
+
   [`& .${stepConnectorClasses.line}`]: {
     height: 3,
     boxShadow: "none",
@@ -218,6 +221,7 @@ export const Checkout = () => {
           <Title component="h4" variant="h4" align="center">
             Checkout
           </Title>
+
           <Stepper
             activeStep={activeStep}
             connector={<ColorlibConnector />}
@@ -243,6 +247,7 @@ export const Checkout = () => {
               <Typography variant="h5" gutterBottom>
                 Thank you for your order.
               </Typography>
+
               <Typography variant="subtitle1">
                 Your order number is #2001539. We have emailed your order
                 confirmation, and will send you an update when your order has

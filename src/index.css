@@ -11,16 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.loader,
-.loader:before,
-.loader:after {
+.ProductCardSkeleton,
+.ProductCardSkeleton:before,
+.ProductCardSkeleton:after {
   border-radius: 50%;
   width: 2.5em;
   height: 2.5em;
   animation-fill-mode: both;
   animation: bblFadInOut 1.8s infinite ease-in-out;
 }
-.loader {
+.ProductCardSkeleton {
   color: #673ab7;
   font-size: 7px;
   position: relative;
@@ -28,17 +28,17 @@ code {
   transform: translateZ(0);
   animation-delay: -0.16s;
 }
-.loader:before,
-.loader:after {
+.ProductCardSkeleton:before,
+.ProductCardSkeleton:after {
   content: "";
   position: absolute;
   top: 0;
 }
-.loader:before {
+.ProductCardSkeleton:before {
   left: -3.5em;
   animation-delay: -0.32s;
 }
-.loader:after {
+.ProductCardSkeleton:after {
   left: 3.5em;
 }
 

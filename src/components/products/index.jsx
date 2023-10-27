@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, styled, Box, Typography } from "@mui/material";
 import ProductCard from "../productCard";
-import { Loader } from "../index";
+import { ProductCardSkeleton } from "../index";
 
 const ProductsGrid = styled(Grid)(() => ({
   marginTop: 8,
@@ -37,7 +37,7 @@ const NoDataTitle = styled(Typography)(() => ({
 
 const Products = ({ Products, loading }) => {
   if (loading) {
-    return <Loader />;
+    return <ProductCardSkeleton />;
   } else {
     return (
       <React.Fragment>

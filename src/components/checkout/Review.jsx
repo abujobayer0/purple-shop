@@ -6,6 +6,18 @@ import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 import { useSelector } from "react-redux";
 import useDiscount from "../../hooks/useCartCalculations";
+import { styled } from "@mui/material/styles";
+
+const StyledListItem = styled(ListItem)(() => ({
+  paddingTop: 8,
+  paddingBottom: 8,
+  paddingLeft: 0,
+  paddingRight: 0,
+}));
+
+const Title = styled(Typography)(() => ({
+  marginTop: 16,
+}));
 
 const Review = () => {
   const cartItems = useSelector((state) => state.cart.items);
@@ -31,75 +43,89 @@ const Review = () => {
 
       <List disablePadding>
         {cartItems.map((product) => (
-          <ListItem key={product.product.id} sx={{ py: 1, px: 0 }}>
+          <StyledListItem key={product.product.id}>
             <ListItemText
               primary={product.product?.title}
               secondary={product.product.description}
             />
+
             <Typography variant="body2">
               {product.quantity} {" x "}€{" "}
               {`${(product.product.price * product.quantity).toFixed(2)}`}
             </Typography>
-          </ListItem>
+          </StyledListItem>
         ))}
 
-        <ListItem sx={{ py: 1, px: 0 }}>
+        <StyledListItem>
           <ListItemText primary="Sub Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             € {totalWithoutDiscount.toFixed(2)}
           </Typography>
-        </ListItem>
-        <ListItem sx={{ py: 1, px: 0 }}>
+        </StyledListItem>
+
+        <StyledListItem>
           <ListItemText primary="Discount" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             {discount.discount}%
           </Typography>
-        </ListItem>
-        <ListItem sx={{ py: 1, px: 0 }}>
+        </StyledListItem>
+
+        <StyledListItem>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             € {discountedTotal.toFixed(2)}
           </Typography>
-        </ListItem>
+        </StyledListItem>
       </List>
 
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
+          <Title variant="h6" gutterBottom>
             Shipping
-          </Typography>
+          </Title>
+
           <Typography gutterBottom>The Granary</Typography>
+
           <Typography gutterBottom>
             The Granary, Kingston House Estate, Kingston Bagpuize, Abingdon,
             Oxfordshire OX13 5AX, UK
           </Typography>
         </Grid>
+
         <Grid item container direction="column" xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
+          <Title variant="h6" gutterBottom>
             Payment details
-          </Typography>
+          </Title>
+
           <Grid container>
             <Grid item xs={6}>
               <Typography gutterBottom>Card type</Typography>
             </Grid>
+
             <Grid item xs={6}>
               <Typography gutterBottom>Visa</Typography>
             </Grid>
+
             <Grid item xs={6}>
               <Typography gutterBottom>Card holder</Typography>
             </Grid>
+
             <Grid item xs={6}>
               <Typography gutterBottom>James Alexander Gale</Typography>
             </Grid>
+
             <Grid item xs={6}>
               <Typography gutterBottom>Card number</Typography>
             </Grid>
+
             <Grid item xs={6}>
               <Typography gutterBottom>xxxx-xxxx-xxxx-1234</Typography>
             </Grid>
+
             <Grid item xs={6}>
               <Typography gutterBottom>Expiry date</Typography>
             </Grid>
+
             <Grid item xs={6}>
               <Typography gutterBottom>04/2024</Typography>
             </Grid>

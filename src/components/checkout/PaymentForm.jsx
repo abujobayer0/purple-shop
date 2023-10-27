@@ -6,12 +6,13 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Alert from "@mui/material/Alert";
 
-export default function PaymentForm() {
+const PaymentForm = () => {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Payment method
       </Typography>
+
       <Alert severity="warning">Optional Demo Fields !!</Alert>
 
       <Grid container spacing={3}>
@@ -26,6 +27,7 @@ export default function PaymentForm() {
             variant="standard"
           />
         </Grid>
+
         <Grid item xs={12} md={6}>
           <TextField
             required
@@ -37,6 +39,7 @@ export default function PaymentForm() {
             variant="standard"
           />
         </Grid>
+
         <Grid item xs={12} md={6}>
           <TextField
             required
@@ -48,6 +51,7 @@ export default function PaymentForm() {
             variant="standard"
           />
         </Grid>
+
         <Grid item xs={12} md={6}>
           <TextField
             required
@@ -60,6 +64,7 @@ export default function PaymentForm() {
             variant="standard"
           />
         </Grid>
+
         <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox color="secondary" name="saveCard" value="yes" />}
@@ -69,4 +74,6 @@ export default function PaymentForm() {
       </Grid>
     </React.Fragment>
   );
-}
+};
+
+export default PaymentForm;

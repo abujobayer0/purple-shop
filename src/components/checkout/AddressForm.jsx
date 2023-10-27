@@ -12,7 +12,9 @@ const AddressForm = () => {
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
+
       <Alert severity="warning">Optional Demo Fields !</Alert>
+
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -26,6 +28,7 @@ const AddressForm = () => {
             variant="standard"
           />
         </Grid>
+
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -38,6 +41,7 @@ const AddressForm = () => {
             variant="standard"
           />
         </Grid>
+
         <Grid item xs={12}>
           <TextField
             required
@@ -50,6 +54,7 @@ const AddressForm = () => {
             variant="standard"
           />
         </Grid>
+
         <Grid item xs={12}>
           <TextField
             id="address2"
@@ -61,6 +66,7 @@ const AddressForm = () => {
             variant="standard"
           />
         </Grid>
+
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -73,6 +79,7 @@ const AddressForm = () => {
             variant="standard"
           />
         </Grid>
+
         <Grid item xs={12} sm={6}>
           <TextField
             id="state"
@@ -83,6 +90,7 @@ const AddressForm = () => {
             variant="standard"
           />
         </Grid>
+
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -95,6 +103,7 @@ const AddressForm = () => {
             variant="standard"
           />
         </Grid>
+
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -107,6 +116,7 @@ const AddressForm = () => {
             variant="standard"
           />
         </Grid>
+
         <Grid item xs={12}>
           <FormControlLabel
             control={

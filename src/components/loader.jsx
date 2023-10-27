@@ -59,4 +59,10 @@ const ProductCardSkeleton = () => {
   );
 };
 
-export default ProductCardSkeleton;
+const SidebarSkeleton = () => {
+  return [1, 2, 3, 4].map((item, index) => (
+    <Skeleton key={index} width={"100%"} height={60} />
+  ));
+};
+
+export { ProductCardSkeleton, SidebarSkeleton };

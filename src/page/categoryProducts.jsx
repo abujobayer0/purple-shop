@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import useFetchProducts from "../hooks/useFetchProducts";
-import { Products, Loader } from "../components";
+import { Products, ProductCardSkeleton } from "../components";
 import { Container } from "@mui/material";
 
 const CategoryProducts = () => {
@@ -15,7 +15,7 @@ const CategoryProducts = () => {
   if (loading) {
     return (
       <Container>
-        <Loader />
+        <ProductCardSkeleton />
       </Container>
     );
   } else {

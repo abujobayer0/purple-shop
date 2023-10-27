@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import { Badge, Container, styled } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
@@ -111,24 +110,22 @@ const NavBar = ({ cartItems }) => {
 
             <Box>
               <Link to={"/cart"}>
-                <IconButton size="small" color="inherit">
-                  <button
-                    className={`cart-animation ${
-                      cartAnimation ? "cart-active" : ""
-                    } `}
+                <button
+                  className={`cart-animation ${
+                    cartAnimation ? "cart-active" : ""
+                  } `}
+                >
+                  <StyledBadge
+                    badgeContent={totalCartQuantity}
+                    color="secondary"
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
                   >
-                    <StyledBadge
-                      badgeContent={totalCartQuantity}
-                      color="secondary"
-                      anchorOrigin={{
-                        vertical: "top",
-                        horizontal: "left",
-                      }}
-                    >
-                      <StyledShoppingCart />
-                    </StyledBadge>
-                  </button>
-                </IconButton>
+                    <StyledShoppingCart />
+                  </StyledBadge>
+                </button>
               </Link>
             </Box>
           </StyledToolbar>

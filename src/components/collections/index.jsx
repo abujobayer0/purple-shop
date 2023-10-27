@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Container, Typography, styled, Box } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { SidebarSkeleton } from "../loader";
 
 const Title = styled(Typography)(({ theme }) => ({
   color: "white",
@@ -80,6 +81,8 @@ const Collections = ({ collections, setTag, closeDrawer }) => {
           </NavLink>
         ))}
       </StyledBox>
+
+      {collections.length <= 1 && <SidebarSkeleton />}
     </StyledContainer>
   );
 };
